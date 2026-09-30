@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-const TRADINGVIEW_SCRIPT = 'https://widgets.tradingview-widget.com/w/en/tv-ticker-tape.js';
-const TICKER_SYMBOLS = 'FOREXCOM:SPXUSD,FOREXCOM:DJI,FOREXCOM:NSXUSD,FOREXCOM:US2000';
+const TRADINGVIEW_SCRIPT = 'https://widgets.tradingview-widget.com/w/en/tv-tickers.js';
+const TICKER_SYMBOLS = 'FOREXCOM:SPXUSD,FOREXCOM:NSXUSD,FX:EURUSD,BITSTAMP:BTCUSD,BITSTAMP:ETHUSD';
 
 export default function MarketTicker() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,8 +18,10 @@ export default function MarketTicker() {
       document.head.appendChild(script);
     }
 
-    const ticker = document.createElement('tv-ticker-tape');
+    const ticker = document.createElement('tv-tickers');
     ticker.setAttribute('symbols', TICKER_SYMBOLS);
+    ticker.setAttribute('hide-chart', '');
+    ticker.setAttribute('item-size', 'compact');
     ticker.setAttribute('aria-label', 'TradingView market ticker');
     container.replaceChildren(ticker);
 
