@@ -34,6 +34,10 @@ The homepage's “Built with purpose” section links to AI Reference, Queue Eve
 - The homepage JPEG image slot is intentionally empty and labeled for replacement with a portfolio image.
 - EarlSky, experience, education, résumé links, and contact details remain editable placeholders.
 
+## Host on GitHub Pages
+
+The repository includes a GitHub Actions workflow that builds the frontend and deploys it when changes are pushed to `main`. In the repository settings, open **Pages** and set the build and deployment source to **GitHub Actions**. The site will be available at <https://earl-sky.github.io/portfolio/> after the workflow completes. Page links use hash routes so direct navigation works on GitHub Pages.
+
 ## Run with Docker
 
 From the project root, with Docker Engine or Desktop and the Compose plugin installed:

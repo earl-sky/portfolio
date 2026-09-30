@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import SiteLayout from './components/SiteLayout';
 import AboutPage from './pages/AboutPage';
 import AIReferencePage from './pages/AIReferencePage';
@@ -55,5 +55,5 @@ function RouteContent() {
 }
 
 export default function App() {
-  return <BrowserRouter><RouteContent /></BrowserRouter>;
+  return <HashRouter><RouteContent /></HashRouter>;
 }
