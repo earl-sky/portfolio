@@ -1,0 +1,27 @@
+{
+  "routes": [
+    { "path": "/", "title": "Home" },
+    { "path": "/software", "title": "Software" },
+    { "path": "/finance", "title": "Finance" },
+    { "path": "/healthcare", "title": "Healthcare" },
+    { "path": "/art", "title": "Art" },
+    { "path": "/about", "title": "About" },
+    { "path": "/software/task-to-do", "title": "Task To Do" },
+    { "path": "/software/ai-reference", "title": "AI Reference" },
+    { "path": "/software/edge-ai", "title": "Edge AI Projx" },
+    { "path": "/software/embedded", "title": "Embedded Projx" },
+    { "path": "/software/api-observability", "title": "API Observability" },
+    { "path": "/finance/sp500-heatmap", "title": "S&P 500 Heatmap" },
+    { "path": "/finance/indices-tracker", "title": "Indices Tracker" },
+    { "path": "/finance/calculator", "title": "Pay Calculators" },
+    { "path": "/healthcare/care-team", "title": "Care Team Workspace" },
+    { "path": "/healthcare/health-insights", "title": "Health Insights" },
+    { "path": "/healthcare/medication-planner", "title": "Medication Planner" },
+    { "path": "/healthcare/eve-chemo", "title": "Eve Chemo" },
+    { "path": "/healthcare/queue-eve-ivs", "title": "Queue Eve IVs" },
+    { "path": "/healthcare/baxter-ivp-exp", "title": "Baxter IVP exp" },
+    { "path": "/art/digital-gallery", "title": "Digital Gallery" },
+    { "path": "/art/generative-studies", "title": "Generative Studies" },
+    { "path": "/art/interactive-sketchbook", "title": "Interactive Sketchbook" }
+  ]
+}
