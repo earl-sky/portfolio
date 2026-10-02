@@ -6,8 +6,8 @@ spring:
     name: weatherline-api
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/weatherline?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
-    username: ${SPRING_DATASOURCE_USERNAME:portfolio_user}
-    password: ${SPRING_DATASOURCE_PASSWORD:portfolio_password}
+    username: ${SPRING_DATASOURCE_USERNAME:weatherline}
+    password: ${SPRING_DATASOURCE_PASSWORD:local-only-change-me}
   jpa:
     hibernate:
       ddl-auto: update
