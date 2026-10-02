@@ -142,6 +142,17 @@ export function ProjectRoutePage({ projectCategory, projectSlug }: { projectCate
               <pre className="embedded-code"><code>{embeddedVisionExample}</code></pre>
             </section>
 
+            <section className="embedded-reference">
+              <div>
+                <p className="section-kicker">REFERENCE TOOL</p>
+                <h3>Tinkercad</h3>
+                <p>Browser-based 3D design, electronics, and coding tools for prototyping circuit ideas before testing them on hardware.</p>
+              </div>
+              <a href="https://www.tinkercad.com/" target="_blank" rel="noopener noreferrer" aria-label="Tinkercad (opens in a new tab)">
+                TINKERCAD.COM <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
+            </section>
+
             <p className="embedded-safety-note">Prototype concept only. Detection and trajectory overlays can miss or misclassify hazards and are not safety equipment. Do not use them instead of mirrors, direct observation, or established navigation. Validate on the bench first; vehicle testing should be supervised and limited to a controlled closed course.</p>
           </div>
         ) : project.slug === 'terminal-art' ? (

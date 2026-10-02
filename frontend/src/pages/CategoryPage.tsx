@@ -2,6 +2,13 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { categories, statusLabel, type CategoryKey } from '../data/portfolio';
 
+const artReferences = [
+  { name: 'The Ladybug', url: 'https://theladybug.app/', domain: 'theladybug.app', description: 'Browser-based visual effects and animation studio for images, video, type, and sound.' },
+  { name: 'PaperAnimator', url: 'https://paperanimator.com/', domain: 'paperanimator.com', description: 'Create paper-cutout and fold-out animations, magazine-style lettering, and animated graphics from images.' },
+  { name: 'CodePen', url: 'https://codepen.io/', domain: 'codepen.io', description: 'An online playground for creating, testing, and sharing front-end code demos.' },
+  { name: 'anime.js', url: 'https://animejs.com/', domain: 'animejs.com', description: 'A JavaScript animation engine for web interfaces, timelines, motion, and SVG effects.' },
+];
+
 export default function CategoryPage({ categoryKey }: { categoryKey: CategoryKey }) {
   const category = categories[categoryKey];
   return (
@@ -31,6 +38,25 @@ export default function CategoryPage({ categoryKey }: { categoryKey: CategoryKey
         {categoryKey === 'finance' && <p className="market-disclaimer">Market cards are design demos. No live prices or investment signals are connected.</p>}
         {(categoryKey === 'healthcare' || categoryKey === 'art' || categoryKey === 'software') && <p className="market-disclaimer">{categoryKey === 'healthcare' ? 'Healthcare source content is unverified and is not clinical guidance. Queue Eve IVs shows the supplied macros as collapsed display-only text; the page never executes them. Baxter IVP exp lists the supplied medication intervals, but no expiry dates are calculated.' : categoryKey === 'software' ? 'AI Reference uses names and descriptions from a supplied list. Only model destinations marked verified link to official first-party pages.' : 'Project slots are editable templates. Replace the concept copy with your implemented work before publishing.'}</p>}
       </section>
+      {categoryKey === 'art' && (
+        <section className="reference-shelf" aria-labelledby="art-references-heading">
+          <div className="reference-shelf-heading">
+            <p className="section-kicker red-kicker">TOOLS / INSPIRATION</p>
+            <h2 id="art-references-heading">Creative references</h2>
+          </div>
+          <div className="reference-grid">
+            {artReferences.map((reference) => (
+              <article className="reference-item" key={reference.domain}>
+                <a href={reference.url} target="_blank" rel="noopener noreferrer" aria-label={`${reference.name} (opens in a new tab)`}>
+                  <h3>{reference.name}<ArrowUpRight size={14} aria-hidden="true" /></h3>
+                  <span>{reference.domain}</span>
+                </a>
+                <p>{reference.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }

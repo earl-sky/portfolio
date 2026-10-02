@@ -109,6 +109,22 @@
 .terminal-art-command p { margin: 7px 0 3px; color: #737987; font-family: var(--mono); font-size: 7px; text-transform: uppercase; }
 .terminal-art-command code, .terminal-art-note code { color: #c4d6d4; font-family: var(--mono); font-size: 9px; overflow-wrap: anywhere; }
 .terminal-art-note { margin-top: 22px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.09); }
+.reference-shelf { padding: 32px 0 68px; border-top: 1px solid var(--line); }
+.reference-shelf-heading { margin-bottom: 15px; }
+.reference-shelf-heading h2 { margin: 5px 0 0; color: #edf0f4; font-size: 21px; }
+.reference-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 28px; }
+.reference-item { min-width: 0; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+.reference-item a { display: inline-block; color: #e2e6eb; text-decoration: none; }
+.reference-item a h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 12px; }
+.reference-item a:hover { color: var(--teal); }
+.reference-item a > span { color: #7e8490; font: 8px var(--mono); }
+.reference-item > p { margin: 8px 0 0; color: #a6aab4; font-size: 9px; line-height: 1.7; }
+.embedded-reference { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 20px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.09); border-bottom: 1px solid rgba(255,255,255,.09); }
+.embedded-reference .section-kicker { margin: 0 0 6px; color: #7e9b9b; font: 8px var(--mono); }
+.embedded-reference h3 { margin: 0 0 5px; color: #e2e6eb; font-size: 12px; }
+.embedded-reference p:last-child { margin: 0; color: #a6aab4; font-size: 9px; line-height: 1.7; }
+.embedded-reference > a { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 5px; color: #9ee6dc; font: 8px var(--mono); text-decoration: none; }
+.embedded-reference > a:hover { color: #fff; }
 .route-backlink { margin: 25px 0 58px; }
 .route-backlink .button-text { gap: 8px; }
 
@@ -238,6 +254,8 @@
   .detail-placeholder-grid { grid-template-columns: 1fr; }
   .embedded-project-content { grid-template-columns: 1fr; gap: 20px; }
   .embedded-image-placeholder { min-height: 170px; }
+  .reference-grid { grid-template-columns: 1fr; }
+  .embedded-reference { align-items: flex-start; flex-direction: column; gap: 12px; }
   .embedded-spec-grid { grid-template-columns: 1fr; }
   .embedded-code { font-size: 8px; }
   .stock-heatmap { grid-template-columns: repeat(4,minmax(0,1fr)); grid-auto-rows: 64px; gap: 4px; }
