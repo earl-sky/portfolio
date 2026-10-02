@@ -8,7 +8,7 @@ export type EveChemoEntry = {
 // Transcribed from the user-supplied evechemolist.html; not clinically validated.
 export const eveChemoEntries: EveChemoEntry[] = [
   { medication: 'BLEOmycin', tubing: 'STD', bud: '🏠 1 d', other: '-' },
-  { medication: 'CARBOplatin', tubing: 'STD', bud: '🏠 1 d (NS) 🏠 30 h|r (D5W)\n❄️ 30 hr (NS) ❄️ 7 d (D5W)', other: '-' },
+  { medication: 'CARBOplatin', tubing: 'STD', bud: '🏠 1 d (NS) 🏠 30 hr (D5W)\n❄️ 30 hr (NS) ❄️ 7 d (D5W)', other: '-' },
   { medication: 'CISplatin', tubing: 'STD', bud: '🏠 30 hr', other: '⚠️ Protect from Light ☀️' },
   { medication: 'DACARBAzine', tubing: 'STD', bud: '🏠 8 hr ❄️ 1 d', other: '⚠️ Protect from Light ☀️' },
   { medication: 'DOCEtaxel', tubing: 'TAX', bud: '🏠 6 hr ❄️ 1 d', other: '⚠️ Protect from Light ☀️' },

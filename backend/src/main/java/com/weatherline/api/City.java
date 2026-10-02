@@ -45,4 +45,12 @@ public class City {
     public String getRegion() { return region; }
     public double getLatitude() { return latitude; }
     public double getLongitude() { return longitude; }
+
+    void updateDetails(City city) {
+        this.slug = city.slug;
+        this.name = city.name;
+        this.region = city.region;
+        this.latitude = city.latitude;
+        this.longitude = city.longitude;
+    }
 }

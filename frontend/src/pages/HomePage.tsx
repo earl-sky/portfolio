@@ -1,5 +1,6 @@
-import { ArrowUpRight, BookOpen, HeartPulse, Image as ImageIcon, UserRound } from 'lucide-react';
+import { ArrowUpRight, BookOpen, HeartPulse, UserRound } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import heroPortrait from '../assets/Leonardo_Anime_XL_anime_style_athletic_light_skin_filipino_mal_0 copy.jpg';
 
 const projects = [
   { icon: BookOpen, art: 'software', artLabel: 'MODEL DIRECTORY', category: 'SOFTWARE / AI REFERENCE', title: 'AI Reference', description: 'A searchable directory of AI models with official-source links where a match is verified.', technologies: ['AI models', 'Official links'], to: '/software/ai-reference' },
@@ -8,9 +9,9 @@ const projects = [
 ];
 
 const experience = [
-  { period: 'NOW', role: 'Current role', organization: 'Add your organization · dates', detail: 'Add one concise outcome: a system you owned, a measurable improvement, or a release you shipped.' },
-  { period: 'PREVIOUS', role: 'Previous role', organization: 'Add your organization · dates', detail: 'Replace this draft with a specific engineering contribution and the impact it made.' },
-  { period: 'FOUNDATION', role: 'Education or independent work', organization: 'Add a school, course, or relevant project', detail: 'Use this space for the experience that started your software journey.' },
+  { period: 'CURRENT', role: 'Software Engineering Student', organization: 'Western Governors University', detail: 'Bachelor of Science in Software Engineering (Java), completion date: Nov 2026.' },
+  { period: '2022–2025', role: 'Inpatient Pharmacy Technician', organization: 'Seattle Veterans Affairs Hospital', detail: 'Evening-shift inpatient pharmacy technician.' },
+  { period: 'EDUCATION', role: 'Education / Independent Work', organization: 'Western Governors University · Community College of the Air Force', detail: 'BS Software Engineering (Java), 2026 · AAS Pharmacy Technology, 2017 · Front End Web Development WGU Certificate, Mar 2024 · AWS Certified Cloud Practitioner · ITIL Foundation · CompTIA Project+ · Series 65 in progress.' },
 ];
 
 const skillGroups = [
@@ -55,12 +56,8 @@ export default function HomePage() {
           <div className="hero-actions"><Link className="button-primary" to="/software">EXPLORE SOFTWARE <span aria-hidden="true">↘</span></Link><Link className="button-text" to="/about">RÉSUMÉ <span aria-hidden="true">→</span></Link></div>
         </div>
         <div className="hero-visuals">
-          <figure className="hero-image-holder" aria-label="JPEG portfolio image placeholder">
-            <div className="hero-image-placeholder" aria-hidden="true">
-              <ImageIcon size={33} strokeWidth={1.2} />
-              <span className="hero-image-format">JPEG</span>
-            </div>
-            <figcaption><span className="hero-image-slot">IMAGE SLOT / 01</span><span>Portfolio photo placeholder</span></figcaption>
+          <figure className="hero-image-holder">
+            <img className="hero-image-photo" src={heroPortrait} alt="Anime-style portrait with sunglasses against a red backdrop" />
           </figure>
           <TerminalCard />
         </div>

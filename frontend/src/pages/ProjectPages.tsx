@@ -5,13 +5,72 @@ import { getProject, categories, type CategoryKey } from '../data/portfolio';
 import { getMonthlyBasicPay2026, militaryGradeGroups, serviceBrackets, type PayGrade } from '../data/militaryPay2026';
 
 const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+const embeddedVisionExample = `# Illustrative only; not safety-rated detection.
+from dataclasses import dataclass
+
+WARNABLE = {"pedestrian", "car", "bicycle", "motorcycle", "scooter"}
+DEMO_CONFIDENCE = 0.70  # Tune and validate for the camera and environment.
+
+@dataclass(frozen=True)
+class Detection:
+  label: str
+  confidence: float
+
+def rear_view_warnings(detections: list[Detection]) -> list[Detection]:
+  return [
+    detection for detection in detections
+    if detection.label in WARNABLE
+    and detection.confidence >= DEMO_CONFIDENCE
+  ]`;
+
+const terminalArtGroups = [
+  {
+    title: 'Animated scenes',
+    commands: [
+      { name: 'Matrix rain', formula: 'cmatrix', run: 'cmatrix' },
+      { name: 'Steam locomotive', formula: 'sl', run: 'sl' },
+      { name: 'Aquarium', formula: 'asciiquarium', run: 'asciiquarium' },
+      { name: 'ASCII fire', formula: 'libcaca', run: 'cacafire' },
+      { name: 'Nyan Cat', formula: 'nyancat', run: 'nyancat' },
+    ],
+  },
+  {
+    title: 'ASCII & text art',
+    commands: [
+      { name: 'Talking cow', formula: 'cowsay', run: 'cowsay "Hello World"' },
+      { name: 'Large text', formula: 'figlet', run: 'figlet Hello!' },
+      { name: 'Colorful text', formula: 'toilet', run: 'toilet --gay Hello' },
+      { name: 'System logo', formula: 'neofetch', run: 'neofetch' },
+      { name: 'Dog text box', formula: 'boxes', run: 'echo "Hello" | boxes -d dog' },
+    ],
+  },
+  {
+    title: 'Dashboards & audio',
+    commands: [
+      { name: 'Audio visualizer', formula: 'cava', run: 'cava --help' },
+      { name: 'System monitor', formula: 'btop', run: 'btop' },
+      { name: 'System monitor', formula: 'htop', run: 'htop' },
+      { name: 'System monitor', formula: 'gtop', run: 'gtop' },
+      { name: 'System monitor', formula: 'vtop', run: 'vtop' },
+      { name: 'GPU monitor', formula: 'nvtop', run: 'nvtop' },
+    ],
+  },
+  {
+    title: 'Built-in surprise',
+    commands: [
+      { name: 'Emacs Tetris', formula: 'emacs', run: 'emacs -q --no-splash -f tetris' },
+    ],
+  },
+];
 
 function PageBreadcrumb({ category, title }: { category: string; title: string }) {
   return <div className="page-breadcrumb"><Link to="/">HOME</Link><span>/</span><Link to={`/${category.toLowerCase()}`}>{category.toUpperCase()}</Link><span>/</span><span>{title.toUpperCase()}</span></div>;
 }
 
-export function ProjectRoutePage() {
-  const { category, slug } = useParams();
+export function ProjectRoutePage({ projectCategory, projectSlug }: { projectCategory?: string; projectSlug?: string } = {}) {
+  const params = useParams();
+  const category = projectCategory ?? params.category;
+  const slug = projectSlug ?? params.slug;
   const project = getProject(category, slug);
   if (!project || !category) return <NotFoundPage />;
   const categoryLabel = categories[category as CategoryKey]?.label ?? category;
@@ -25,9 +84,97 @@ export function ProjectRoutePage() {
       </section>
       <section className="detail-placeholder">
         <div className="placeholder-top"><span>PROJECT DETAIL</span><span className={`project-status status-${project.status}`}>{project.status === 'demo' ? 'DEMO DATA' : 'PROJECT SLOT'}</span></div>
-        <h2>{project.status === 'demo' ? 'A data connection can bring this view to life.' : 'Make this case study yours.'}</h2>
-        <p>{project.status === 'demo' ? 'This page establishes the route and visual treatment. Connect a quote or data provider before presenting live market figures.' : 'Add a real build, screenshots, architecture notes, and outcomes here. The card and route are ready for your project details.'}</p>
-        <div className="detail-placeholder-grid"><div><span>01 / OVERVIEW</span><p>What problem does the project solve?</p></div><div><span>02 / BUILD</span><p>Which decisions, tools, or constraints made it interesting?</p></div><div><span>03 / OUTCOME</span><p>Add a demo link and a truthful result when available.</p></div></div>
+        {project.slug === 'embedded' ? (
+          <div className="embedded-project">
+            <div className="embedded-project-content">
+              <div className="embedded-image-placeholder" role="img" aria-label="Image placeholder for Arduino and Raspberry Pi 5 projects">
+                <span>PROJECT IMAGE PLACEHOLDER</span>
+                <strong>ARDUINO / RASPBERRY PI 5</strong>
+              </div>
+              <div className="embedded-project-copy">
+                <p className="section-kicker">ARDUINO + RASPBERRY PI 5 / JETSON ORIN</p>
+                <h2>Embedded display &amp; vision console</h2>
+                <p>A configurable in-vehicle display concept combining maps, camera views, and experimental object-warning overlays. The iPad is the display; a Raspberry Pi 5 or Jetson Orin is a candidate for camera processing, with Arduino available for simple physical controls.</p>
+              </div>
+            </div>
+
+            <div className="embedded-spec-grid">
+              <section className="embedded-spec">
+                <h3>Display modes</h3>
+                <ul>
+                  <li>Movie</li>
+                  <li>GPS</li>
+                  <li>Racetrack map</li>
+                  <li>Touge map with upcoming lane intersections</li>
+                  <li>Camera</li>
+                </ul>
+              </section>
+              <section className="embedded-spec">
+                <h3>Hardware &amp; controls</h3>
+                <ul>
+                  <li>iPad mini display · 8.3 in</li>
+                  <li>iPad Air display · 11 in</li>
+                  <li>Rotator input mapped to <code>dimmer_func</code></li>
+                  <li>Button input mapped to On / Off</li>
+                  <li>Arducam camera module; Raspberry Pi 5 or Jetson Orin as candidate compute</li>
+                </ul>
+              </section>
+              <section className="embedded-spec">
+                <h3>GPS &amp; map behavior</h3>
+                <ul>
+                  <li>Map, speedometer, and miles remaining until the next direction</li>
+                  <li>Map orientation modes: rotating or fixed / north-up</li>
+                  <li>Touge view highlights upcoming lane intersections</li>
+                </ul>
+              </section>
+              <section className="embedded-spec">
+                <h3>Camera &amp; vision concepts</h3>
+                <ul>
+                  <li>Rear view: experimental warnings for pedestrians and vehicles, including cars, bikes, motorcycles, and scooters</li>
+                  <li>Rear and 360 views: experimental trajectory approximation overlays</li>
+                  <li>Evaluate camera placement and visibility in controlled go-kart / motorcycle tests</li>
+                </ul>
+              </section>
+            </div>
+
+            <section className="embedded-code-section">
+              <div className="embedded-code-heading"><h3>Vision warning filter</h3><span>PYTHON / CONCEPT</span></div>
+              <pre className="embedded-code"><code>{embeddedVisionExample}</code></pre>
+            </section>
+
+            <p className="embedded-safety-note">Prototype concept only. Detection and trajectory overlays can miss or misclassify hazards and are not safety equipment. Do not use them instead of mirrors, direct observation, or established navigation. Validate on the bench first; vehicle testing should be supervised and limited to a controlled closed course.</p>
+          </div>
+        ) : project.slug === 'terminal-art' ? (
+          <div className="terminal-art-content">
+            <div className="terminal-art-intro">
+              <h2>A little theater in the terminal</h2>
+              <p>Install a command with Homebrew, then run its demo in Terminal. These examples are local command-line programs; this page does not execute them.</p>
+            </div>
+            {terminalArtGroups.map((group) => (
+              <section className="terminal-art-group" key={group.title}>
+                <h3>{group.title}</h3>
+                <div className="terminal-art-grid">
+                  {group.commands.map((item) => (
+                    <article className="terminal-art-command" key={`${item.formula}-${item.run}`}>
+                      <h4>{item.name}</h4>
+                      <p>Install</p>
+                      <code>brew install {item.formula}</code>
+                      <p>Run</p>
+                      <code>{item.run}</code>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ))}
+            <p className="terminal-art-note">Press Ctrl+C to quit interactive demos. Install packages one at a time; Homebrew formula availability varies by macOS version and enabled taps. <code>btop++</code> is commonly launched with the <code>btop</code> command.</p>
+          </div>
+        ) : (
+          <>
+            <h2>{project.status === 'demo' ? 'A data connection can bring this view to life.' : 'Make this case study yours.'}</h2>
+            <p>{project.status === 'demo' ? 'This page establishes the route and visual treatment. Connect a quote or data provider before presenting live market figures.' : 'Add a real build, screenshots, architecture notes, and outcomes here. The card and route are ready for your project details.'}</p>
+            <div className="detail-placeholder-grid"><div><span>01 / OVERVIEW</span><p>What problem does the project solve?</p></div><div><span>02 / BUILD</span><p>Which decisions, tools, or constraints made it interesting?</p></div><div><span>03 / OUTCOME</span><p>Add a demo link and a truthful result when available.</p></div></div>
+          </>
+        )}
       </section>
       <div className="route-backlink"><Link className="button-text" to={`/${category}`}><ArrowLeft size={14} /> BACK TO {categoryLabel.toUpperCase()}</Link></div>
     </main>

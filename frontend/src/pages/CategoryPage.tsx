@@ -18,7 +18,11 @@ export default function CategoryPage({ categoryKey }: { categoryKey: CategoryKey
             const Icon = project.icon;
             return (
               <Link className="category-project-card" to={project.route} key={project.slug}>
-                <div className="category-card-visual"><span className="card-index">0{index + 1}</span><Icon size={42} strokeWidth={1.45} aria-hidden="true" /><ArrowUpRight className="card-open-icon" size={19} aria-hidden="true" /></div>
+                <div className={`category-card-visual ${project.slug === 'embedded' ? 'embedded-card-visual' : ''}`}>
+                  <span className="card-index">0{index + 1}</span>
+                  {project.slug === 'embedded' ? <div className="embedded-card-placeholder" aria-hidden="true"><span>IMAGE PLACEHOLDER</span><strong>ARDUINO / PI 5</strong></div> : <Icon size={42} strokeWidth={1.45} aria-hidden="true" />}
+                  <ArrowUpRight className="card-open-icon" size={19} aria-hidden="true" />
+                </div>
                 <div className="category-card-copy"><div className="category-card-meta"><span>{project.kicker}</span><span className={`project-status status-${project.status}`}>{statusLabel(project.status)}</span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span className="tech-tag" key={tag}>{tag}</span>)}</div></div>
               </Link>
             );

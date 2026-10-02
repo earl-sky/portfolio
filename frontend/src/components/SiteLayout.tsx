@@ -10,8 +10,8 @@ const locations: { slug: string; name: string; timeZone: string; timeZoneCode?: 
   { slug: 'palo-alto', name: 'Palo Alto', timeZone: 'America/Los_Angeles' },
   { slug: 'san-francisco', name: 'San Francisco', timeZone: 'America/Los_Angeles' },
   { slug: 'seattle', name: 'Seattle', timeZone: 'America/Los_Angeles' },
-  { slug: 'dallas', name: 'Dallas, TX', timeZone: 'America/Chicago' },
-  { slug: 'tampa', name: 'Tampa, FL', timeZone: 'America/New_York' },
+  { slug: 'dallas', name: 'Dallas / Fort Worth, TX', timeZone: 'America/Chicago' },
+  { slug: 'miami', name: 'Miami, FL', timeZone: 'America/New_York' },
   { slug: 'dededo', name: 'Dededo, GU', timeZone: 'Pacific/Guam', timeZoneCode: 'ChST' },
   { slug: 'baguio-city', name: 'Baguio City, PH', timeZone: 'Asia/Manila', timeZoneCode: 'PHT' },
 ];
@@ -138,7 +138,35 @@ function CategoryDropdown({
 
 function GlobalHeader() {
   const [openMenu, setOpenMenu] = useState<CategoryKey | null>(null);
+  const [brandText, setBrandText] = useState('EarlSky');
+  const [brandScrambling, setBrandScrambling] = useState(false);
+  const brandTimer = useRef<number | null>(null);
   const navRef = useRef<HTMLElement>(null);
+
+  const resetBrand = () => {
+    if (brandTimer.current !== null) window.clearInterval(brandTimer.current);
+    brandTimer.current = null;
+    setBrandText('EarlSky');
+    setBrandScrambling(false);
+  };
+
+  const scrambleBrand = () => {
+    resetBrand();
+    setBrandScrambling(true);
+    const original = 'EarlSky';
+    const scrambleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&';
+    let step = 0;
+    brandTimer.current = window.setInterval(() => {
+      step += 1;
+      const settledCount = Math.floor((step / 12) * original.length);
+      setBrandText(original.split('').map((character, index) => {
+        if (index < settledCount) return character;
+        return scrambleCharacters[Math.floor(Math.random() * scrambleCharacters.length)];
+      }).join(''));
+      if (step >= 12) resetBrand();
+    }, 35);
+  };
+
   useEffect(() => {
     const onPointerDown = (event: PointerEvent) => {
       if (event.target instanceof Node && !navRef.current?.contains(event.target)) setOpenMenu(null);
@@ -149,6 +177,7 @@ function GlobalHeader() {
     document.addEventListener('pointerdown', onPointerDown);
     document.addEventListener('keydown', onKeyDown);
     return () => {
+      if (brandTimer.current !== null) window.clearInterval(brandTimer.current);
       document.removeEventListener('pointerdown', onPointerDown);
       document.removeEventListener('keydown', onKeyDown);
     };
@@ -156,7 +185,17 @@ function GlobalHeader() {
 
   return (
     <header className="site-header">
-      <Link className="wordmark" to="/" aria-label="EarlSky dot dev home">EarlSky<span>.dev</span></Link>
+      <Link
+        className={`wordmark header-wordmark${brandScrambling ? ' is-scrambling' : ''}`}
+        to="/"
+        aria-label="EarlSky dot dev home"
+        onPointerEnter={scrambleBrand}
+        onPointerLeave={resetBrand}
+        onFocus={scrambleBrand}
+        onBlur={resetBrand}
+      >
+        {brandText}<span>.dev</span>
+      </Link>
       <nav className="main-nav" aria-label="Main navigation" ref={navRef}>
         <NavLink end to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
         {categoryList.map((category) => (

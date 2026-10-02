@@ -26,9 +26,7 @@ function RouteContent() {
         {/* Software projects, in portfolio order */}
         <Route path="/software/task-to-do" element={<ProjectRoutePage />} />
         <Route path="/software/ai-reference" element={<AIReferencePage />} />
-        <Route path="/software/edge-ai" element={<ProjectRoutePage />} />
-        <Route path="/software/embedded" element={<ProjectRoutePage />} />
-        <Route path="/software/api-observability" element={<ProjectRoutePage />} />
+        <Route path="/software/embedded" element={<ProjectRoutePage projectCategory="software" projectSlug="embedded" />} />
 
         {/* Finance projects, in portfolio order */}
         <Route path="/finance/sp500-heatmap" element={<SP500HeatmapPage />} />
@@ -36,9 +34,6 @@ function RouteContent() {
         <Route path="/finance/calculator" element={<FinanceCalculatorPage />} />
 
         {/* Healthcare projects, in portfolio order */}
-        <Route path="/healthcare/care-team" element={<ProjectRoutePage />} />
-        <Route path="/healthcare/health-insights" element={<ProjectRoutePage />} />
-        <Route path="/healthcare/medication-planner" element={<ProjectRoutePage />} />
         <Route path="/healthcare/eve-chemo" element={<EveChemoPage />} />
         <Route path="/healthcare/queue-eve-ivs" element={<QueueEveIVsPage />} />
         <Route path="/healthcare/baxter-ivp-exp" element={<BaxterIVPExpPage />} />
@@ -47,6 +42,7 @@ function RouteContent() {
         <Route path="/art/digital-gallery" element={<ProjectRoutePage />} />
         <Route path="/art/generative-studies" element={<ProjectRoutePage />} />
         <Route path="/art/interactive-sketchbook" element={<ProjectRoutePage />} />
+        <Route path="/art/terminal-art" element={<ProjectRoutePage projectCategory="art" projectSlug="terminal-art" />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

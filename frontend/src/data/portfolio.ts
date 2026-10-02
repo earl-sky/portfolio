@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, CircuitBoard, ClipboardList, Cpu, HeartPulse, Image, Palette, Pill, Sparkles } from 'lucide-react';
+import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, CircuitBoard, ClipboardList, Image, Palette, Pill, Sparkles, Terminal } from 'lucide-react';
 
 export type CategoryKey = 'software' | 'finance' | 'healthcare' | 'art';
 export type ProjectStatus = 'concept' | 'demo' | 'tool';
@@ -27,13 +27,11 @@ export const categories: Record<CategoryKey, PortfolioCategory> = {
   software: {
     key: 'software', label: 'Software', eyebrow: 'SOFTWARE / SELECTED BUILDS',
     title: 'Interfaces, systems, and the code between.', accent: 'teal',
-    description: 'A home for product ideas across application software, artificial intelligence, edge devices, embedded systems, and backend observability.',
+    description: 'A home for application software, artificial intelligence, and embedded systems projects.',
     projects: [
       { slug: 'task-to-do', title: 'Task To Do', kicker: 'PRODUCTIVITY', description: 'A project slot for a focused task planner. Add your workflow, demo, and engineering decisions.', route: '/software/task-to-do', icon: ClipboardList, tags: ['React', 'TypeScript'], status: 'concept' },
       { slug: 'ai-reference', title: 'AI Reference', kicker: 'ARTIFICIAL INTELLIGENCE / MODEL DIRECTORY', description: 'A tiered model directory using the supplied list, with official links only where a first-party source confirms the model.', route: '/software/ai-reference', icon: BrainCircuit, tags: ['32 models', 'Official links'], status: 'demo' },
-      { slug: 'edge-ai', title: 'Edge AI Projx', kicker: 'EDGE COMPUTING', description: 'A project slot for on-device inference, constrained runtimes, and edge deployment work.', route: '/software/edge-ai', icon: Cpu, tags: ['Edge AI', 'Inference'], status: 'concept' },
-      { slug: 'embedded', title: 'Embedded Projx', kicker: 'EMBEDDED SYSTEMS', description: 'A project slot for firmware, microcontrollers, and hardware/software integration.', route: '/software/embedded', icon: CircuitBoard, tags: ['C / C++', 'Hardware'], status: 'concept' },
-      { slug: 'api-observability', title: 'API Observability', kicker: 'BACKEND SYSTEMS / OBSERVABILITY', description: 'A project slot for service health, latency trends, and actionable backend telemetry.', route: '/software/api-observability', icon: Activity, tags: ['Spring Boot', 'Metrics', 'React'], status: 'concept' },
+      { slug: 'embedded', title: 'Embedded Projx', kicker: 'EMBEDDED SYSTEMS', description: 'Arduino and Raspberry Pi 5 projects covering firmware, sensors, hardware integration, and small Linux-based builds.', route: '/software/embedded', icon: CircuitBoard, tags: ['Arduino', 'Raspberry Pi 5'], status: 'concept' },
     ],
   },
   finance: {
@@ -47,13 +45,10 @@ export const categories: Record<CategoryKey, PortfolioCategory> = {
     ],
   },
   healthcare: {
-    key: 'healthcare', label: 'Healthcare', eyebrow: 'HEALTHCARE / CONCEPTS',
+    key: 'healthcare', label: 'Healthcare', eyebrow: 'HEALTHCARE / REFERENCE DEMOS',
     title: 'Technology for more thoughtful care.', accent: 'teal',
-    description: 'A matching portfolio section for healthcare software concepts and reference demos. Eve Chemo, Queue Eve IVs, and Baxter IVP exp use supplied, unverified source material; source macros are display-only and medication intervals are not clinical guidance.',
+    description: 'Reference demos for healthcare workflows and medication information. Supplied source material is unverified; macros are display-only and medication intervals are not clinical guidance.',
     projects: [
-      { slug: 'care-team', title: 'Care Team Workspace', kicker: 'CARE COORDINATION', description: 'A concept slot for a shared care-team view, communication flow, or patient handoff tool.', route: '/healthcare/care-team', icon: HeartPulse, tags: ['Workflow', 'Accessibility'], status: 'concept' },
-      { slug: 'health-insights', title: 'Health Insights', kicker: 'PATIENT EXPERIENCE', description: 'A concept slot for turning personal health information into clearer, patient-friendly summaries.', route: '/healthcare/health-insights', icon: Activity, tags: ['Data', 'Patient tools'], status: 'concept' },
-      { slug: 'medication-planner', title: 'Medication Planner', kicker: 'DAILY SUPPORT', description: 'A concept slot for medication schedules, reminders, and approachable adherence experiences.', route: '/healthcare/medication-planner', icon: Pill, tags: ['Planning', 'Mobile'], status: 'concept' },
       { slug: 'eve-chemo', title: 'Eve Chemo', kicker: 'EVENING SHIFT / REFERENCE DEMO', description: 'A searchable view of the supplied evening-shift medication reference. Source values are unverified and not clinical guidance.', route: '/healthcare/eve-chemo', icon: Pill, tags: ['Reference demo', 'BUD', 'Tubing'], status: 'demo' },
       { slug: 'queue-eve-ivs', title: 'Queue Eve IVs', kicker: 'EVENING SHIFT / WORKFLOW DEMO', description: 'A read-only view of the supplied workflow details and macros. Macro text is displayed only and never executed; source accuracy is unverified.', route: '/healthcare/queue-eve-ivs', icon: ClipboardList, tags: ['Workflow source', 'Display-only'], status: 'demo' },
       { slug: 'baxter-ivp-exp', title: 'Baxter IVP exp', kicker: 'MEDICATION STORAGE / REFERENCE DEMO', description: 'Shows medication names and intervals from the supplied HTML. Values are unverified, not clinical guidance, and no expiry dates are calculated.', route: '/healthcare/baxter-ivp-exp', icon: Pill, tags: ['Source intervals', 'No date output'], status: 'demo' },
@@ -62,11 +57,12 @@ export const categories: Record<CategoryKey, PortfolioCategory> = {
   art: {
     key: 'art', label: 'Art', eyebrow: 'ART / EXPERIMENTS',
     title: 'A little room for the unexpected.', accent: 'red',
-    description: 'A gallery-style home for visual experiments, creative coding, and work that sits between software and art.',
+    description: 'A gallery-style home for visual experiments, creative coding, terminal-native art, and work that sits between software and art.',
     projects: [
       { slug: 'digital-gallery', title: 'Digital Gallery', kicker: 'SELECTED WORK', description: 'A concept slot for a curated gallery of illustrations, photography, or digital pieces.', route: '/art/digital-gallery', icon: Image, tags: ['Gallery', 'Visuals'], status: 'concept' },
       { slug: 'generative-studies', title: 'Generative Studies', kicker: 'CREATIVE CODE', description: 'A concept slot for procedural art, generative forms, and code-led visual experiments.', route: '/art/generative-studies', icon: Sparkles, tags: ['Generative', 'Code'], status: 'concept' },
       { slug: 'interactive-sketchbook', title: 'Interactive Sketchbook', kicker: 'PLAY / INTERACTION', description: 'A concept slot for small interactive pieces, sketches, and playful browser experiments.', route: '/art/interactive-sketchbook', icon: Palette, tags: ['Interactive', 'Experiments'], status: 'concept' },
+      { slug: 'terminal-art', title: 'Terminal Art', kicker: 'COMMAND-LINE VISUALS', description: 'A collection of terminal-native animations, ASCII art, audio visualizers, and system dashboards for macOS.', route: '/art/terminal-art', icon: Terminal, tags: ['Homebrew', 'ASCII', 'Terminal'], status: 'concept' },
     ],
   },
 };

@@ -18,7 +18,7 @@ A responsive multi-page portfolio built with **React + TypeScript**, **Java 21 /
 - `/healthcare/baxter-ivp-exp` — supplied medication names and storage intervals with illustrative dates calculated from the viewer's current local date; source values and date projections are unverified and not clinical guidance.
 - `/about` — editable résumé template; use Print / Save PDF to export.
 
-The weather rail shows current conditions for Las Vegas, Palo Alto, San Francisco, Seattle, Dallas, Tampa, Dededo, and Baguio City. Each tile includes Fahrenheit/Celsius readings and a local clock with timezone abbreviation and UTC offset.
+The weather rail shows current conditions for Las Vegas, Palo Alto, San Francisco, Seattle, Dallas, Miami, Dededo, and Baguio City. Each tile includes Fahrenheit/Celsius readings and a local clock with timezone abbreviation and UTC offset.
 
 The homepage's “Built with purpose” section links to AI Reference, Queue Eve IVs, and About, and includes a marked JPEG image slot beside the hero headline.
 
@@ -59,5 +59,5 @@ If the API is unavailable during UI-only preview, the weather rail falls back to
 
 ## Existing API
 
-- `GET /api/weather/cities` — current weather for Las Vegas, Palo Alto, San Francisco, Seattle, Dallas, Tampa, Dededo, and Baguio City.
+- `GET /api/weather/cities` — current weather for Las Vegas, Palo Alto, San Francisco, Seattle, Dallas, Miami, Dededo, and Baguio City.
 - `GET /api/health` — health check.

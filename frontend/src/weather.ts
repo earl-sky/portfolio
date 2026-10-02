@@ -49,7 +49,7 @@ const cities = [
   { slug: 'palo-alto', name: 'Palo Alto', region: 'California', latitude: 37.4419, longitude: -122.143 },
   { slug: 'seattle', name: 'Seattle', region: 'Washington', latitude: 47.6062, longitude: -122.3321 },
   { slug: 'dallas', name: 'Dallas', region: 'Texas', latitude: 32.7767, longitude: -96.7970 },
-  { slug: 'tampa', name: 'Tampa', region: 'Florida', latitude: 27.9506, longitude: -82.4572 },
+  { slug: 'miami', name: 'Miami', region: 'Florida', latitude: 25.7617, longitude: -80.1918 },
   { slug: 'dededo', name: 'Dededo', region: 'Guam', latitude: 13.5178, longitude: 144.8391 },
   { slug: 'baguio-city', name: 'Baguio City', region: 'Philippines', latitude: 16.4023, longitude: 120.5960 },
 ];
