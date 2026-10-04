@@ -301,7 +301,7 @@
 .eve-chemo-notice p { margin: 6px 0 0; color: #aa9ba0; font-size: 9px; line-height: 1.75; }
 .eve-chemo-panel { margin: 18px 0 0; padding: 22px; border: 1px solid #252832; border-radius: 7px; background: linear-gradient(145deg, #151820, #101218); }
 .eve-chemo-heading { display: flex; align-items: end; justify-content: space-between; gap: 15px; }
-.eve-chemo-heading .section-kicker { margin-bottom: 7px; color: var(--teal); }
+.eve-chemo-heading .section-kicker { margin-bottom: 7px; color: var(--red); }
 .eve-chemo-heading h2 { margin: 0; color: #edf0f4; font-size: clamp(18px, 2.5vw, 23px); letter-spacing: -.04em; }
 .eve-chemo-count { padding-bottom: 3px; color: #7d8491; font: 10px var(--mono); letter-spacing: .08em; white-space: nowrap; }
 .eve-chemo-search { width: min(100%, 370px); min-height: 39px; display: flex; align-items: center; gap: 9px; margin: 19px 0 12px; padding: 0 11px; border: 1px solid #303541; border-radius: 4px; background: #0c0f14; color: #828995; }
@@ -311,14 +311,14 @@
 .eve-chemo-table-wrap { overflow-x: auto; border: 1px solid rgba(255,255,255,.075); border-radius: 4px; }
 .eve-chemo-table { width: 100%; min-width: 760px; border-collapse: collapse; text-align: left; }
 .eve-chemo-table thead { background: #171a22; }
-.eve-chemo-table th { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.09); color: #838b98; font: 10px var(--mono); letter-spacing: .09em; text-transform: uppercase; }
-.eve-chemo-table td { padding: 13px 14px; border-bottom: 1px solid rgba(255,255,255,.055); color: #b7bdc8; font-size: 9px; line-height: 1.7; vertical-align: top; }
+.eve-chemo-table th { padding: 13px 15px; border-bottom: 1px solid rgba(255,255,255,.09); color: #949cab; font: 12px var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+.eve-chemo-table td { padding: 14px 15px; border-bottom: 1px solid rgba(255,255,255,.055); color: #c2c8d3; font-size: 12px; line-height: 1.65; vertical-align: top; }
 .eve-chemo-table tbody tr:last-child th, .eve-chemo-table tbody tr:last-child td { border-bottom: 0; }
 .eve-chemo-table tbody tr:hover { background: rgba(68,210,197,.035); }
-.eve-chemo-table tbody th[scope="row"] { min-width: 175px; color: #eef0f4; font: 600 10px var(--mono); letter-spacing: .01em; text-transform: none; }
-.eve-chemo-table .eve-chemo-tubing { min-width: 112px; color: #91d8d1; font: 9px var(--mono); white-space: nowrap; }
-.eve-chemo-table .eve-chemo-multiline { min-width: 245px; color: #bfc4ce; white-space: pre-line; }
-.eve-chemo-table .eve-chemo-other { min-width: 205px; color: #d2c3a2; }
+.eve-chemo-table tbody th[scope="row"] { min-width: 185px; color: #eef0f4; font: 600 12px var(--mono); letter-spacing: .01em; text-transform: none; }
+.eve-chemo-table .eve-chemo-tubing { min-width: 120px; color: #91d8d1; font: 11px var(--mono); white-space: nowrap; }
+.eve-chemo-table .eve-chemo-multiline { min-width: 250px; color: #c7ccd6; white-space: pre-line; }
+.eve-chemo-table .eve-chemo-other { min-width: 210px; color: #d9cbac; }
 .eve-chemo-table .eve-chemo-empty { padding: 24px; color: #858995; text-align: center; }
 .eve-chemo-source-note { margin: 12px 0 0; color: #737987; font-size: 10px; line-height: 1.7; }
 .eve-chemo-source-note code { color: #aab0bc; font-family: var(--mono); }
@@ -343,7 +343,7 @@
 .ai-inline-verified { color: var(--teal); font: 10px var(--mono); }
 .ai-model-panel { margin: 18px 0 0; padding: 22px; border: 1px solid #252832; border-radius: 7px; background: linear-gradient(145deg, #151820, #101218); }
 .ai-model-heading { display: flex; align-items: end; justify-content: space-between; gap: 14px; }
-.ai-model-heading .section-kicker { margin-bottom: 7px; color: var(--teal); }
+.ai-model-heading .section-kicker { margin-bottom: 7px; color: var(--red); }
 .ai-model-heading h2 { margin: 0; color: #edf0f4; font-size: clamp(19px, 2.5vw, 24px); letter-spacing: -.04em; }
 .ai-model-count { padding-bottom: 3px; color: #7d8491; font: 10px var(--mono); letter-spacing: .08em; white-space: nowrap; }
 .ai-model-controls { display: flex; align-items: end; gap: 12px; margin: 19px 0 12px; }
@@ -356,13 +356,13 @@
 .ai-model-table-wrap { overflow-x: auto; border: 1px solid rgba(255,255,255,.075); border-radius: 4px; }
 .ai-model-table { width: 100%; min-width: 930px; border-collapse: collapse; text-align: left; }
 .ai-model-table thead { background: #171a22; }
-.ai-model-table th { padding: 12px 13px; border-bottom: 1px solid rgba(255,255,255,.09); color: #838b98; font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-.ai-model-table thead small { display: block; margin-top: 4px; color: #5e6572; font: 9px var(--mono); }
-.ai-model-table td { padding: 12px 13px; border-bottom: 1px solid rgba(255,255,255,.055); color: #aeb4bf; font-size: 9px; line-height: 1.7; vertical-align: top; }
+.ai-model-table th { padding: 13px 15px; border-bottom: 1px solid rgba(255,255,255,.09); color: #949cab; font: 12px var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+.ai-model-table thead small { display: block; margin-top: 4px; color: #6c7380; font: 10px var(--mono); }
+.ai-model-table td { padding: 13px 15px; border-bottom: 1px solid rgba(255,255,255,.055); color: #b9bfca; font-size: 12px; line-height: 1.65; vertical-align: top; }
 .ai-model-table tbody tr:last-child th, .ai-model-table tbody tr:last-child td { border-bottom: 0; }
 .ai-model-table tbody tr:hover { background: rgba(68,210,197,.03); }
-.ai-model-table tbody th[scope="row"] { min-width: 160px; color: #eef0f4; font: 600 10px var(--mono); letter-spacing: 0; text-transform: none; }
-.ai-tier-chip { display: inline-block; padding: 4px 6px; border: 1px solid rgba(255,255,255,.085); border-radius: 2px; color: #959ba7; font: 9px var(--mono); white-space: nowrap; }
+.ai-model-table tbody th[scope="row"] { min-width: 170px; color: #eef0f4; font: 600 12px var(--mono); letter-spacing: 0; text-transform: none; }
+.ai-tier-chip { display: inline-block; padding: 4px 6px; border: 1px solid rgba(255,255,255,.085); border-radius: 2px; color: #959ba7; font: 10px var(--mono); white-space: nowrap; }
 .ai-model-table td:nth-child(3) { min-width: 320px; }
 .ai-model-table td:last-child { min-width: 190px; }
 .ai-model-link { display: inline-flex; align-items: center; gap: 5px; color: var(--teal); font: 10px var(--mono); text-decoration: underline; text-decoration-color: rgba(68,210,197,.3); text-underline-offset: 3px; }
@@ -397,7 +397,7 @@
 .queue-eve-overview h2, .queue-eve-safety h2 { margin: 15px 0 8px; color: #edf0f4; font-size: 21px; letter-spacing: -.04em; }
 .queue-eve-overview > p, .queue-eve-safety > p { max-width: 790px; margin: 0; color: #9095a1; font-size: 10px; line-height: 1.8; }
 .queue-eve-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
-.queue-eve-section-heading .section-kicker { margin-bottom: 7px; color: var(--teal); }
+.queue-eve-section-heading .section-kicker { margin-bottom: 7px; color: var(--red); }
 .queue-eve-section-heading h2 { margin: 0; color: #edf0f4; font-size: clamp(19px, 2.5vw, 24px); letter-spacing: -.04em; }
 .queue-eve-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 11px; }
 .queue-eve-card { min-width: 0; padding: 16px; border: 1px solid rgba(255,255,255,.075); border-radius: 5px; background: rgba(255,255,255,.018); }
@@ -437,14 +437,14 @@
 /* Queue Eve source macros: collapsed, static text only */
 .queue-eve-source-panel { margin: 18px 0 0; padding: 22px; border: 1px solid #252832; border-radius: 7px; background: linear-gradient(145deg, #151820, #101218); }
 .queue-eve-source-panel h2 { margin: 15px 0 8px; color: #edf0f4; font-size: 21px; letter-spacing: -.04em; }
-.queue-eve-source-intro { max-width: 790px; margin: 0 0 15px; color: #9095a1; font-size: 10px; line-height: 1.8; }
+.queue-eve-source-intro { max-width: 790px; margin: 0 0 15px; color: #a3a9b5; font-size: 13px; line-height: 1.75; }
 .queue-eve-source-list { display: grid; gap: 8px; }
 .queue-eve-source-detail { min-width: 0; border: 1px solid rgba(255,255,255,.075); border-radius: 4px; background: rgba(255,255,255,.018); }
 .queue-eve-source-detail summary { display: flex; align-items: center; gap: 14px; padding: 13px 14px; color: #e9edf2; cursor: pointer; list-style: none; }
 .queue-eve-source-detail summary::-webkit-details-marker { display: none; }
 .queue-eve-source-detail summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
-.queue-eve-source-index, .queue-eve-source-action { color: #7d8491; font: 9px var(--mono); letter-spacing: .06em; white-space: nowrap; }
-.queue-eve-source-title { flex: 1; min-width: 0; font-size: 10px; }
+.queue-eve-source-index, .queue-eve-source-action { color: #8b929f; font: 11px var(--mono); letter-spacing: .06em; white-space: nowrap; }
+.queue-eve-source-title { flex: 1; min-width: 0; font-size: 13px; }
 .queue-eve-source-detail[open] .queue-eve-source-action { color: var(--teal); }
 .queue-eve-source-body { padding: 0 14px 14px; }
 .queue-eve-source-body > p { margin: 0 0 10px; color: #969ca8; font-size: 9px; line-height: 1.7; }
@@ -458,17 +458,17 @@
 .baxter-exp-table-wrap { overflow-x: auto; border: 1px solid rgba(255,255,255,.075); border-radius: 4px; }
 .baxter-exp-table { width: 100%; min-width: 620px; border-collapse: collapse; text-align: left; }
 .baxter-exp-table thead { background: #171a22; }
-.baxter-exp-table th { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.09); color: #838b98; font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-.baxter-exp-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.055); color: #b7bdc8; font-size: 9px; line-height: 1.7; }
+.baxter-exp-table th { padding: 13px 15px; border-bottom: 1px solid rgba(255,255,255,.09); color: #949cab; font: 12px var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+.baxter-exp-table td { padding: 13px 15px; border-bottom: 1px solid rgba(255,255,255,.055); color: #c2c8d3; font-size: 12px; line-height: 1.65; }
 .baxter-exp-table tbody tr:last-child th, .baxter-exp-table tbody tr:last-child td { border-bottom: 0; }
-.baxter-exp-table tbody th[scope="row"] { color: #eef0f4; font: 600 10px var(--mono); letter-spacing: 0; text-transform: none; }
-.baxter-exp-table .baxter-exp-group th { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.07); background: rgba(68,210,197,.035); color: var(--teal); font: 10px var(--mono); letter-spacing: .07em; text-transform: uppercase; }
-.baxter-exp-not-calculated { display: inline-block; padding: 4px 6px; border: 1px solid rgba(239,70,83,.2); border-radius: 2px; color: #db8b91; font: 9px var(--mono); letter-spacing: .03em; white-space: nowrap; }
+.baxter-exp-table tbody th[scope="row"] { color: #eef0f4; font: 600 12px var(--mono); letter-spacing: 0; text-transform: none; }
+.baxter-exp-table .baxter-exp-group th { padding: 11px 15px; border-bottom: 1px solid rgba(255,255,255,.07); background: rgba(68,210,197,.035); color: var(--teal); font: 11px var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+.baxter-exp-not-calculated { display: inline-block; padding: 4px 6px; border: 1px solid rgba(239,70,83,.2); border-radius: 2px; color: #db8b91; font: 10px var(--mono); letter-spacing: .03em; white-space: nowrap; }
 @media (max-width: 560px) {
   .queue-eve-source-panel, .baxter-exp-table-panel { padding: 14px; }
   .queue-eve-source-detail summary { align-items: flex-start; flex-wrap: wrap; gap: 7px 10px; }
   .queue-eve-source-index { width: 100%; }
-  .queue-eve-source-title { flex-basis: calc(100% - 85px); }
+  .queue-eve-source-title { flex-basis: calc(100% - 96px); }
   .queue-eve-source-body { padding: 0 10px 10px; }
   .queue-eve-source-body pre { max-height: 320px; padding: 10px; font-size: 9px; }
 }
