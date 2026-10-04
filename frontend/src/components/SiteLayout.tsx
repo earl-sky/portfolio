@@ -201,7 +201,7 @@ function GlobalHeader() {
         {categoryList.map((category) => (
           <CategoryDropdown key={category.key} categoryKey={category.key} openMenu={openMenu} setOpenMenu={setOpenMenu} />
         ))}
-        <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>Resume</NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>Résumé</NavLink>
       </nav>
     </header>
   );
