@@ -1,6 +1,11 @@
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ClipboardList, ShieldAlert } from 'lucide-react';
+import { ArrowLeft, ClipboardList, Copy, ShieldAlert } from 'lucide-react';
 import { queueEveSourceSections } from '../data/queueEveSource';
+
+type SourceSection = (typeof queueEveSourceSections)[number];
+
+const COPIED_POPUP_MS = 1000;
 
 const workflows = [
   {
@@ -30,6 +35,29 @@ const workflows = [
 ];
 
 export default function QueueEveIVsPage() {
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Clear the pending "copied" timer if the page unmounts mid-countdown.
+  useEffect(() => () => {
+    if (copyTimer.current) clearTimeout(copyTimer.current);
+  }, []);
+
+  // Copies only the supplied macro text; the clipboard never receives anything executable.
+  const handleCopy = async (event: MouseEvent<HTMLButtonElement>, section: SourceSection) => {
+    // Keep the click from toggling the parent <details> disclosure.
+    event.preventDefault();
+    event.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(section.source);
+    } catch {
+      return; // Clipboard permission denied or unavailable: show no false confirmation.
+    }
+    setCopiedId(section.id);
+    if (copyTimer.current) clearTimeout(copyTimer.current);
+    copyTimer.current = setTimeout(() => setCopiedId(null), COPIED_POPUP_MS);
+  };
+
   return (
     <main className="route-main project-detail-page category-healthcare queue-eve-page">
       <div className="page-breadcrumb"><Link to="/">HOME</Link><span>/</span><Link to="/healthcare">HEALTHCARE</Link><span>/</span><span>QUEUE EVE IVS</span></div>
@@ -81,7 +109,7 @@ export default function QueueEveIVsPage() {
         <div className="queue-eve-source-list">
           {queueEveSourceSections.map((section, index) => (
             <details className="queue-eve-source-detail" key={section.id}>
-              <summary><span className="queue-eve-source-index">0{index + 1} / SOURCE</span><span className="queue-eve-source-title">{section.title}</span><span className="queue-eve-source-action">VIEW TEXT</span></summary>
+              <summary><span className="queue-eve-source-index">0{index + 1} / SOURCE</span><span className="queue-eve-source-title">{section.title}</span><span className="queue-eve-source-actions"><span className="queue-eve-source-action">VIEW TEXT</span><button className="queue-eve-copy" type="button" aria-label={`Copy macro text for ${section.title}`} onClick={(event) => handleCopy(event, section)}><Copy size={13} strokeWidth={1.7} aria-hidden="true" /><span className={`queue-eve-copied-popup${copiedId === section.id ? ' is-visible' : ''}`} role="status" aria-live="polite">{copiedId === section.id ? 'copied' : ''}</span></button></span></summary>
               <div className="queue-eve-source-body">
                 <p>{section.summary}</p>
                 <pre><code>{section.source}</code></pre>

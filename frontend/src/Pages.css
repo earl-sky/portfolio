@@ -407,7 +407,7 @@
 .queue-eve-notice p { margin: 6px 0 0; color: #aa9ba0; font-size: 9px; line-height: 1.75; }
 .queue-eve-overview, .queue-eve-workflows, .queue-eve-safety { margin: 18px 0 0; padding: 22px; border: 1px solid #252832; border-radius: 7px; background: linear-gradient(145deg, #151820, #101218); }
 .queue-eve-overview h2, .queue-eve-safety h2 { margin: 15px 0 8px; color: #edf0f4; font-size: 21px; letter-spacing: -.04em; }
-.queue-eve-overview > p, .queue-eve-safety > p { max-width: 790px; margin: 0; color: #9095a1; font-size: 10px; line-height: 1.8; }
+.queue-eve-overview > p, .queue-eve-safety > p { max-width: 790px; margin: 0; color: #9095a1; font-size: 12px; line-height: 1.8; }
 .queue-eve-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
 .queue-eve-section-heading .section-kicker { margin-bottom: 7px; color: var(--red); }
 .queue-eve-section-heading h2 { margin: 0; color: #edf0f4; font-size: clamp(19px, 2.5vw, 24px); letter-spacing: -.04em; }
@@ -416,16 +416,20 @@
 .queue-eve-card-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: #7d8491; font: 9px var(--mono); letter-spacing: .05em; }
 .queue-eve-card h3 { margin: 17px 0 8px; color: #e9edf2; font-size: 14px; letter-spacing: -.03em; }
 .queue-eve-card p { margin: 0; color: #969ca8; font-size: 9px; line-height: 1.75; }
-.queue-eve-source-note { margin: 15px 0 0; color: #737987; font-size: 10px; line-height: 1.7; }
+.queue-eve-source-note { margin: 15px 0 0; color: #737987; font-size: 12px; line-height: 1.7; }
 .queue-eve-source-note code { color: #aab0bc; font-family: var(--mono); }
 @media (max-width: 560px) {
   .queue-eve-notice { gap: 9px; padding: 13px; }
-  .queue-eve-notice strong { font-size: 10px; }
+  .queue-eve-notice strong { font-size: 12px; }
   .queue-eve-overview, .queue-eve-workflows, .queue-eve-safety { padding: 14px; }
   .queue-eve-section-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
   .queue-eve-grid { grid-template-columns: 1fr; }
 }
-.queue-eve-count { padding-bottom: 3px; color: #7d8491; font: 10px var(--mono); letter-spacing: .08em; white-space: nowrap; }
+.queue-eve-count { padding-bottom: 3px; color: #7d8491; font: 12px var(--mono); letter-spacing: .08em; white-space: nowrap; }
+/* `.page-breadcrumb` and `.placeholder-top` are shared across routes at 10px; scope the
+   two-step bump to this page only so the other detail pages keep their existing size. */
+.queue-eve-page .page-breadcrumb,
+.queue-eve-page .placeholder-top { font-size: 12px; }
 
 
 /* Baxter IVP exp: read-only concept; unverified medication values withheld */
@@ -457,10 +461,17 @@
 .queue-eve-source-detail summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .queue-eve-source-index, .queue-eve-source-action { color: #8b929f; font: 11px var(--mono); letter-spacing: .06em; white-space: nowrap; }
 .queue-eve-source-title { flex: 1; min-width: 0; font-size: 13px; }
-.queue-eve-source-detail[open] .queue-eve-source-action { color: var(--teal); }
+.queue-eve-source-actions { display: inline-flex; align-items: center; gap: 10px; }
+/* VIEW TEXT turns from the cyan default to the page's red accent while expanded. */
+.queue-eve-source-detail[open] .queue-eve-source-action { color: var(--red); }
+.queue-eve-copy { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 25px; height: 25px; padding: 0; border: 1px solid rgba(255,255,255,.1); border-radius: 3px; background: rgba(255,255,255,.02); color: #8b929f; cursor: pointer; transition: color .16s ease, border-color .16s ease, background .16s ease; }
+.queue-eve-copy:hover { border-color: rgba(239,70,83,.42); background: rgba(239,70,83,.1); color: #ef8b93; }
+.queue-eve-copy:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.queue-eve-copied-popup { position: absolute; right: 0; bottom: calc(100% + 7px); z-index: 4; padding: 4px 7px; border: 1px solid rgba(239,70,83,.42); border-radius: 3px; background: #17151b; color: #f3a4ab; font: 11px var(--mono); letter-spacing: .07em; white-space: nowrap; opacity: 0; transform: translateY(3px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+.queue-eve-copied-popup.is-visible { opacity: 1; transform: translateY(0); }
 .queue-eve-source-body { padding: 0 14px 14px; }
 .queue-eve-source-body > p { margin: 0 0 10px; color: #969ca8; font-size: 9px; line-height: 1.7; }
-.queue-eve-source-body pre { max-height: 380px; margin: 0; overflow: auto; padding: 14px; border: 1px solid rgba(255,255,255,.06); border-radius: 3px; background: #0b0d12; color: #b9c4c8; font: 10px/1.65 var(--mono); tab-size: 4; white-space: pre; }
+.queue-eve-source-body pre { max-height: 380px; margin: 0; overflow: auto; padding: 14px; border: 1px solid rgba(255,255,255,.06); border-radius: 3px; background: #0b0d12; color: #b9c4c8; font: 12px/1.65 var(--mono); tab-size: 4; white-space: pre; }
 .queue-eve-source-body code { font: inherit; }
 
 /* Baxter IVP exp source values: unverified reference table, no computed expiry */
@@ -480,7 +491,8 @@
   .queue-eve-source-panel, .baxter-exp-table-panel { padding: 14px; }
   .queue-eve-source-detail summary { align-items: flex-start; flex-wrap: wrap; gap: 7px 10px; }
   .queue-eve-source-index { width: 100%; }
-  .queue-eve-source-title { flex-basis: calc(100% - 96px); }
+  .queue-eve-source-title { flex-basis: calc(100% - 124px); }
   .queue-eve-source-body { padding: 0 10px 10px; }
-  .queue-eve-source-body pre { max-height: 320px; padding: 10px; font-size: 9px; }
+  /* Keeps the original one-step-down relationship now that the desktop size is 12px. */
+  .queue-eve-source-body pre { max-height: 320px; padding: 10px; font-size: 11px; }
 }
