@@ -1,11 +1,14 @@
-import { ArrowUpRight, BookOpen, HeartPulse, UserRound } from 'lucide-react';
+import { ArrowUpRight, BookOpen, Calculator, HeartPulse } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import heroPortrait from '../assets/Leonardo_Anime_XL_anime_style_athletic_light_skin_filipino_mal_0 copy.jpg';
 
-const projects = [
-  { icon: BookOpen, art: 'software', artLabel: 'MODEL DIRECTORY', category: 'SOFTWARE / AI REFERENCE', title: 'AI Reference', description: 'A searchable directory of AI models with official-source links where a match is verified.', technologies: ['AI models', 'Official links'], to: '/software/ai-reference' },
-  { icon: HeartPulse, art: 'healthcare', artLabel: 'DISPLAY-ONLY DEMO', category: 'HEALTHCARE / WORKFLOW DEMO', title: 'Queue Eve IVs', description: 'A read-only workflow demonstration with collapsed macro panels; nothing is executed.', technologies: ['Display-only', 'Workflow demo'], to: '/healthcare/queue-eve-ivs' },
-  { icon: UserRound, art: 'about', artLabel: 'RÉSUMÉ TEMPLATE', category: 'ABOUT / RÉSUMÉ', title: 'About', description: 'A résumé page for engineering experience, skills, education, and contact details.', technologies: ['Experience', 'Résumé'], to: '/about' },
+const projects: { icon: LucideIcon; art: string; charset: MatrixCharset; artLabel: string; category: string; title: string; description: string; technologies: string[]; to: string }[] = [
+  { icon: BookOpen, art: 'software', charset: 'ascii', artLabel: 'MODEL DIRECTORY', category: 'SOFTWARE / AI REFERENCE', title: 'AI Reference', description: 'A searchable directory of AI models with official-source links where a match is verified.', technologies: ['AI models', 'Official links'], to: '/software/ai-reference' },
+  { icon: Calculator, art: 'finance', charset: 'han', artLabel: 'PAY CALCULATORS', category: 'FINANCE / PAY TOOLS', title: 'Pay Calculators', description: 'Estimate salary take-home, or build a 2026 U.S. military paycheck from basic pay, duty-station BAH, BAS, and state tax.', technologies: ['Salary estimate', 'Basic pay', 'BAH', 'BAS'], to: '/finance/calculator' },
+  { icon: HeartPulse, art: 'healthcare', charset: 'hiragana', artLabel: 'DISPLAY-ONLY DEMO', category: 'HEALTHCARE / WORKFLOW DEMO', title: 'Queue Eve IVs', description: 'A read-only workflow demonstration with collapsed macro panels; nothing is executed.', technologies: ['Display-only', 'Workflow demo'], to: '/healthcare/queue-eve-ivs' },
 ];
 
 const experience = [
@@ -25,6 +28,159 @@ const activityRows = [
   '123201123442231012332101', '012210011231201123210012', '001232012210123321012201',
   '012101223210012321102330',
 ];
+
+// cmatrix-style falling columns: a trail of glyphs led by a single brighter head
+// character at the leading edge. Glyphs are deterministic so columns do not reshuffle.
+const matrixCharsets = {
+  ascii: Array.from({ length: 94 }, (_, index) => String.fromCharCode(33 + index)).join(''),
+  han: '的一是了我不人在他有这个上们来到时大地为子中你说生国年着就那和要她出也得里后自以会家可下而过天去能对小多然于心学么之都好看起发当没成只如事把还用第样道想作种开美总从无情己面最女但现前些所同日手又行意动方期它头经长儿回位分爱老因很给名法间斯知世什两次使身者被高已亲其进此话常与活正感',
+  hiragana: 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽぁぃぅぇぉゃゅょゎゔゕゖゝゞ',
+} as const;
+
+type MatrixCharset = keyof typeof matrixCharsets;
+
+const heroHeadingSegments = [
+  { text: 'Here\'s to the ', accent: false },
+  { text: 'crazy ones:', accent: true },
+] as const;
+const heroHeadingLabel = 'Here\'s to the crazy ones:';
+const heroHeadingLetterCount = heroHeadingSegments.reduce(
+  (total, segment) => total + (segment.text.match(/[a-z]/gi)?.length ?? 0),
+  0,
+);
+// Mandarin plus hiragana, matching the two scripts used across the project cards.
+const heroGlitchAlphabet = matrixCharsets.han + matrixCharsets.hiragana;
+const heroGlitchSteps = 14;
+const heroGlitchFrameMs = 35;
+
+const heroGlitchGlyph = (letterIndex: number, step: number) => {
+  let hash = Math.imul(letterIndex + 1, 0x9E3779B1) ^ Math.imul(step + 1, 0x85EBCA77);
+  hash = Math.imul(hash ^ (hash >>> 15), 0x2C1B3C6D);
+  return heroGlitchAlphabet.charAt(((hash ^ (hash >>> 12)) >>> 0) % heroGlitchAlphabet.length);
+};
+
+// cmatrix rain: one freshly generated character leads each column and five trailing
+// characters fade out above it. Opacity rises toward the top of the trail, so the
+// tail dissolves the further it is from the head.
+const matrixTrailCount = 3;
+const matrixTrailOpacity = [1, 0.33, 0.67, 0.76, 0.43];
+// The Lucide art icon renders at full opacity, so the rain sits at half its visible weight.
+// The authored ramp above is scaled at render time, which keeps these values editable.
+const matrixOpacityScale = 0.5;
+const matrixFrameMs = 110;
+
+const matrixGlyphAt = (charset: string, column: number, step: number, salt: number) => {
+  let hash = Math.imul(column + 1 + salt * 131, 0x9E3779B1) ^ Math.imul(step + 1, 0x85EBCA77);
+  hash = Math.imul(hash ^ (hash >>> 15), 0x2C1B3C6D);
+  return charset.charAt((((hash ^ (hash >>> 12)) >>> 0) % charset.length));
+};
+
+function MatrixField({ offset, charset }: { offset: number; charset: MatrixCharset }) {
+  const fieldRef = useRef<HTMLDivElement>(null);
+  const probeRef = useRef<HTMLSpanElement>(null);
+  const [fit, setFit] = useState<{ columns: number; lines: number } | null>(null);
+  const [tick, setTick] = useState(0);
+
+  // Glyph advance differs per script (0.6em for DM Mono ASCII, 1em for CJK), so the
+  // column count and run height are measured from the rendered font instead of guessed.
+  useLayoutEffect(() => {
+    const field = fieldRef.current;
+    const probe = probeRef.current;
+    if (!field || !probe) return;
+    const measure = () => {
+      probe.textContent = matrixCharsets[charset].charAt(0);
+      const cellWidth = probe.getBoundingClientRect().width;
+      if (!cellWidth) return;
+      const style = getComputedStyle(field);
+      const usable = field.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const lineHeight = parseFloat(getComputedStyle(probe).lineHeight) || cellWidth * 1.2;
+      setFit({
+        columns: Math.max(1, Math.floor(usable / cellWidth)),
+        lines: Math.max(matrixTrailCount + 1, Math.ceil(field.clientHeight / lineHeight) + 1),
+      });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(field);
+    return () => observer.disconnect();
+  }, [charset]);
+
+  useEffect(() => {
+    const id = window.setInterval(() => setTick((value) => value + 1), matrixFrameMs);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const columns = useMemo(() => {
+    if (!fit) return [];
+    const glyphs = matrixCharsets[charset];
+    const blanks = '\n'.repeat(fit.lines - matrixTrailCount - 1);
+    return Array.from({ length: fit.columns }, (_, column) => ({
+      blanks,
+      trail: Array.from({ length: matrixTrailCount }, (_, step) => matrixGlyphAt(glyphs, column, tick - (matrixTrailCount - step), offset)),
+      head: matrixGlyphAt(glyphs, column, tick, offset),
+    }));
+  }, [charset, fit, offset, tick]);
+
+  return (
+    <div className="matrix-field" ref={fieldRef} aria-hidden="true">
+      <span className="matrix-probe" ref={probeRef} aria-hidden="true" />
+      {columns.map((column, index) => (
+        <span
+          className="matrix-column"
+          key={index}
+          style={{
+            '--fall-duration': `${(2.4 + ((index * 7 + offset * 5) % 9) * 0.24).toFixed(2)}s`,
+            '--fall-delay': `${-(((index * 13 + offset * 29) % 47) * 0.11).toFixed(2)}s`,
+          } as CSSProperties}
+        >
+          <i>{column.blanks}{column.trail.map((glyph, step) => <span className="matrix-trail-char" key={step} style={{ opacity: matrixTrailOpacity[step] * matrixOpacityScale }}>{glyph}</span>)}<b className="matrix-head" style={{ opacity: matrixOpacityScale }}>{column.head}</b></i>
+          <i>{column.blanks}{column.trail.map((glyph, step) => <span className="matrix-trail-char" key={step} style={{ opacity: matrixTrailOpacity[step] * matrixOpacityScale }}>{glyph}</span>)}<b className="matrix-head" style={{ opacity: matrixOpacityScale }}>{column.head}</b></i>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function HeroTitle() {
+  const [step, setStep] = useState(heroGlitchSteps);
+  const [glitching, setGlitching] = useState(false);
+
+  // Runs once on load, like the EarlSky.dev wordmark, and settles left to right.
+  // Deliberately not wired to hover or focus.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let frame = 0;
+    setGlitching(true);
+    setStep(0);
+    const id = window.setInterval(() => {
+      frame += 1;
+      setStep(frame);
+      if (frame >= heroGlitchSteps) {
+        window.clearInterval(id);
+        setGlitching(false);
+      }
+    }, heroGlitchFrameMs);
+    return () => window.clearInterval(id);
+  }, []);
+
+  let seen = 0;
+  const settled = Math.floor((step / heroGlitchSteps) * heroHeadingLetterCount);
+  return (
+    <h1 id="hero-title" className={glitching ? 'hero-title-glitch' : undefined} aria-label={heroHeadingLabel}>
+      {heroHeadingSegments.map((segment) => {
+        const text = [...segment.text].map((char) => {
+          if (!/[a-z]/i.test(char)) return char;
+          seen += 1;
+          if (seen <= settled) return char;
+          return heroGlitchGlyph(seen, step);
+        }).join('');
+        return segment.accent
+          ? <span className="accent-red" aria-hidden="true" key={segment.text}>{text}</span>
+          : <span aria-hidden="true" key={segment.text}>{text}</span>;
+      })}
+    </h1>
+  );
+}
 
 function TerminalCard() {
   return (
@@ -49,9 +205,9 @@ export default function HomePage() {
     <main>
       <section className="hero-section" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="eyebrow"><span className="status-dot" /> SOFTWARE ENGINEER <span className="eyebrow-divider">/</span> FULL STACK</p>
-          <h1 id="hero-title">Building high-performance interfaces <span className="accent-red">&amp; scalable systems.</span></h1>
-          <p className="hero-summary">I build thoughtful product experiences and dependable backend systems, from the first interface to the data layer.</p>
+          <p className="eyebrow"><span className="status-dot" /> AGENTIC ENGINEER <span className="eyebrow-divider">/</span> FULL STACK</p>
+          <HeroTitle />
+          <p className="hero-summary">The misfits, the rebels. The troublemakers. The round pegs in the square holes. The ones who see things differently. They’re not fond of rules. You can quote them, disagree with them, glorify or vilify them. About the only thing you can’t do is ignore them. Because they change things. They push the human race forward. And while some may see them as the crazy ones, we see genius. Because the ones who are crazy enough to think that they can change the world, are the ones who do.</p>
           <p className="hero-stack">React · TypeScript · Java · Spring Boot · MySQL · Docker</p>
           <div className="hero-actions"><Link className="button-primary" to="/software">EXPLORE SOFTWARE <span aria-hidden="true">↘</span></Link><Link className="button-text" to="/about">RÉSUMÉ <span aria-hidden="true">→</span></Link></div>
         </div>
@@ -71,6 +227,7 @@ export default function HomePage() {
             return (
               <Link className="project-card" key={project.title} to={project.to}>
                 <div className={`project-art project-art-${project.art}`} aria-hidden="true">
+                  <MatrixField offset={index} charset={project.charset} />
                   <Icon className="project-art-icon" size={39} strokeWidth={1.25} />
                   <span className="project-art-label">{project.artLabel}</span>
                   <span className="project-number">0{index + 1}</span>
@@ -99,10 +256,10 @@ export default function HomePage() {
       </section>
 
       <section className="content-section activity-section" aria-labelledby="activity-title">
-        <div className="activity-copy"><p className="section-kicker lime-kicker">OPEN SOURCE · ACTIVITY</p><h2 id="activity-title">Good software is a team sport.</h2><p>Interested in clean systems, useful tools, and the small details that make products feel effortless.</p><p className="activity-note">The contribution grid is a visual placeholder. Connect a GitHub profile to show real activity.</p><Link className="button-text" to="/about">MORE ABOUT ME <span aria-hidden="true">→</span></Link></div>
+        <div className="activity-copy"><p className="section-kicker lime-kicker">OPEN SOURCE · ACTIVITY</p><h2 id="activity-title">Good software is a team sport.</h2><p>Interested in clean systems, useful tools, and the small details that make products feel effortless.</p><p className="activity-note">The contribution grid is a visual placeholder. Pending a GitHub profile to show real activity.</p><Link className="button-text" to="/about">MORE ABOUT ME <span aria-hidden="true">→</span></Link></div>
         <div className="activity-card" aria-label="Illustrative contribution grid preview"><div className="activity-card-top"><span>CONTRIBUTION ACTIVITY</span><span className="preview-label">PREVIEW</span></div><div className="heatmap" aria-hidden="true">{activityRows.map((row, rowIndex) => <div className="heatmap-row" key={rowIndex}>{[...row].map((level, columnIndex) => <span className={`heat-cell level-${level}`} key={`${rowIndex}-${columnIndex}`} />)}</div>)}</div><div className="heatmap-legend"><span>Illustrative only</span><span>LESS <i className="level-0" /><i className="level-1" /><i className="level-2" /><i className="level-3" /><i className="level-4" /> MORE</span></div></div>
       </section>
-      <section className="contact-band"><span className="contact-dot" /><p>Open to building something thoughtful together.</p><Link className="contact-placeholder" to="/about">Add your résumé and contact details →</Link></section>
+      <section className="contact-band"><span className="contact-dot" /><p>Open to building something thoughtful together.</p><Link className="contact-placeholder" to="/about">Résumé →</Link></section>
     </main>
   );
 }

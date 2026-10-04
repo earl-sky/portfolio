@@ -4,16 +4,17 @@ import { ChevronDown } from 'lucide-react';
 import { categories, categoryList, type CategoryKey } from '../data/portfolio';
 import { fetchWeather, getCondition, type CityWeather } from '../weather';
 import MarketTicker from './MarketTicker';
+import MusicPlayer from './MusicPlayer';
 
-const locations: { slug: string; name: string; timeZone: string; timeZoneCode?: string }[] = [
-  { slug: 'las-vegas', name: 'Las Vegas', timeZone: 'America/Los_Angeles' },
-  { slug: 'palo-alto', name: 'Palo Alto', timeZone: 'America/Los_Angeles' },
-  { slug: 'san-francisco', name: 'San Francisco', timeZone: 'America/Los_Angeles' },
-  { slug: 'seattle', name: 'Seattle', timeZone: 'America/Los_Angeles' },
-  { slug: 'dallas', name: 'Dallas / Fort Worth, TX', timeZone: 'America/Chicago' },
-  { slug: 'miami', name: 'Miami, FL', timeZone: 'America/New_York' },
-  { slug: 'dededo', name: 'Dededo, GU', timeZone: 'Pacific/Guam', timeZoneCode: 'ChST' },
-  { slug: 'baguio-city', name: 'Baguio City, PH', timeZone: 'Asia/Manila', timeZoneCode: 'PHT' },
+const locations: { slug: string; name: string; timeZone: string; timeZoneCode?: string; showCelsius?: boolean }[] = [
+  { slug: 'las-vegas', name: 'Las Vegas NV', timeZone: 'America/Los_Angeles' },
+  { slug: 'palo-alto', name: 'Palo Alto CA', timeZone: 'America/Los_Angeles' },
+  { slug: 'san-francisco', name: 'San Francisco CA', timeZone: 'America/Los_Angeles' },
+  { slug: 'seattle', name: 'Seattle WA', timeZone: 'America/Los_Angeles' },
+  { slug: 'dallas', name: 'Dallas/FW TX', timeZone: 'America/Chicago' },
+  { slug: 'miami', name: 'Miami FL', timeZone: 'America/New_York' },
+  { slug: 'dededo', name: 'Dededo GU', timeZone: 'Pacific/Guam', timeZoneCode: 'ChST' },
+  { slug: 'baguio-city', name: 'Baguio City PH', timeZone: 'Asia/Manila', timeZoneCode: 'PHT', showCelsius: true },
 ];
 
 function weatherEmoji(city?: CityWeather) {
@@ -30,21 +31,16 @@ function weatherEmoji(city?: CityWeather) {
 }
 
 function formatWeatherClock(date: Date, timeZone: string, fixedCode?: string): string {
-  const time = new Intl.DateTimeFormat('en-US', {
+  const time = new Intl.DateTimeFormat('en-GB', {
     timeZone,
-    hour: 'numeric',
+    hour: '2-digit',
     minute: '2-digit',
+    hourCycle: 'h23',
   }).format(date);
-  const parts = new Intl.DateTimeFormat('en-US', { timeZone, timeZoneName: 'short' }).formatToParts(date);
-  const abbreviation = fixedCode ?? parts.find((part) => part.type === 'timeZoneName')?.value ?? 'UTC';
-  const rawOffset = new Intl.DateTimeFormat('en-US', { timeZone, timeZoneName: 'shortOffset' })
+  const abbreviation = fixedCode ?? new Intl.DateTimeFormat('en-US', { timeZone, timeZoneName: 'short' })
     .formatToParts(date)
-    .find((part) => part.type === 'timeZoneName')?.value ?? 'GMT';
-  const offsetMatch = /^GMT([+-])(\d{1,2})(?::(\d{2}))?$/.exec(rawOffset);
-  const utcOffset = offsetMatch
-    ? `UTC${offsetMatch[1] === '-' ? '−' : '+'}${offsetMatch[2].padStart(2, '0')}${offsetMatch[3] ? `:${offsetMatch[3]}` : ''}`
-    : 'UTC+00';
-  return `${time} ${abbreviation} · ${utcOffset}`;
+    .find((part) => part.type === 'timeZoneName')?.value;
+  return abbreviation ? `${time} ${abbreviation}` : time;
 }
 
 function WeatherRail({ cities }: { cities: CityWeather[] }) {
@@ -58,11 +54,15 @@ function WeatherRail({ cities }: { cities: CityWeather[] }) {
   return (
     <div className="weather-rail">
       <div className="weather-rail-inner" role="list" aria-label="Live weather and local time">
-        {locations.map(({ slug, name, timeZone, timeZoneCode }) => {
+        {locations.map(({ slug, name, timeZone, timeZoneCode, showCelsius }) => {
           const city = cities.find((item) => item.slug === slug);
           const fahrenheit = city ? Math.round(city.temperature) : null;
           const celsius = fahrenheit === null ? null : Math.round((fahrenheit - 32) * 5 / 9);
-          const temperature = fahrenheit === null ? '—°F / —°C' : `${fahrenheit}°F / ${celsius}°C`;
+          const temperature = fahrenheit === null
+            ? (showCelsius ? '—°F / —°C' : '—°F')
+            : showCelsius
+              ? `${fahrenheit}°F / ${celsius}°C`
+              : `${fahrenheit}°F`;
           const localClock = formatWeatherClock(now, timeZone, timeZoneCode);
           return (
             <div className="weather-pill" role="listitem" key={slug} aria-label={`${name}: ${temperature}; local time ${localClock}`}>
@@ -93,7 +93,7 @@ function CategoryDropdown({
 
   return (
     <div
-      className={`nav-dropdown ${isOpen ? 'is-open' : ''}`}
+      className={`nav-dropdown nav-dropdown-${categoryKey}${isOpen ? ' is-open' : ''}`}
       onBlur={(event: FocusEvent<HTMLDivElement>) => {
         const target = event.relatedTarget;
         if (!(target instanceof Node) || !event.currentTarget.contains(target)) setOpenMenu(null);
@@ -201,9 +201,8 @@ function GlobalHeader() {
         {categoryList.map((category) => (
           <CategoryDropdown key={category.key} categoryKey={category.key} openMenu={openMenu} setOpenMenu={setOpenMenu} />
         ))}
-        <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>Resume</NavLink>
       </nav>
-      <Link className="header-cta" to="/about">RÉSUMÉ <span aria-hidden="true">↗</span></Link>
     </header>
   );
 }
@@ -220,10 +219,19 @@ function GlobalFooter() {
   );
 }
 
+function cursorEmojiForPath(pathname: string): string {
+  if (pathname === '/software' || pathname.startsWith('/software/')) return '👾';
+  if (pathname === '/finance' || pathname.startsWith('/finance/')) return '💸';
+  if (pathname === '/healthcare' || pathname.startsWith('/healthcare/')) return '💊';
+  if (pathname === '/art' || pathname.startsWith('/art/')) return '🖼️';
+  return '🏎️';
+}
+
 export default function SiteLayout({ children }: { children: ReactNode }) {
   const [cities, setCities] = useState<CityWeather[]>([]);
   const racerRef = useRef<HTMLSpanElement>(null);
   const location = useLocation();
+  const showMarketTicker = location.pathname === '/' || location.pathname === '/finance' || location.pathname.startsWith('/finance/');
 
   const loadWeather = useCallback(async () => {
     try {
@@ -273,14 +281,15 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="portfolio-page">
-      {location.pathname === '/' && <MarketTicker />}
+      {showMarketTicker && <MarketTicker />}
       <WeatherRail cities={cities} />
       <div className="page-shell">
         <GlobalHeader key={location.pathname} />
         {children}
         <GlobalFooter />
       </div>
-      <span className="cursor-racer" ref={racerRef} aria-hidden="true">🏎️💨</span>
+      <span className="cursor-racer" ref={racerRef} aria-hidden="true">{cursorEmojiForPath(location.pathname)}</span>
+      <MusicPlayer />
     </div>
   );
 }

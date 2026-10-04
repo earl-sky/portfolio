@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, CircuitBoard, ClipboardList, Image, Palette, Pill, Sparkles, Terminal } from 'lucide-react';
+import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, ClipboardList, Cpu, Image, Palette, Pill, Sparkles, Terminal } from 'lucide-react';
 
 export type CategoryKey = 'software' | 'finance' | 'healthcare' | 'art';
 export type ProjectStatus = 'concept' | 'demo' | 'tool';
@@ -31,7 +31,7 @@ export const categories: Record<CategoryKey, PortfolioCategory> = {
     projects: [
       { slug: 'task-to-do', title: 'Task To Do', kicker: 'PRODUCTIVITY', description: 'A project slot for a focused task planner. Add your workflow, demo, and engineering decisions.', route: '/software/task-to-do', icon: ClipboardList, tags: ['React', 'TypeScript'], status: 'concept' },
       { slug: 'ai-reference', title: 'AI Reference', kicker: 'ARTIFICIAL INTELLIGENCE / MODEL DIRECTORY', description: 'A tiered model directory using the supplied list, with official links only where a first-party source confirms the model.', route: '/software/ai-reference', icon: BrainCircuit, tags: ['32 models', 'Official links'], status: 'demo' },
-      { slug: 'embedded', title: 'Embedded Projx', kicker: 'EMBEDDED SYSTEMS', description: 'Arduino and Raspberry Pi 5 projects covering firmware, sensors, hardware integration, and small Linux-based builds.', route: '/software/embedded', icon: CircuitBoard, tags: ['Arduino', 'Raspberry Pi 5'], status: 'concept' },
+      { slug: 'embedded', title: 'Embedded Projx', kicker: 'EMBEDDED SYSTEMS', description: 'Arduino and Raspberry Pi 5 projects covering firmware, sensors, hardware integration, and small Linux-based builds.', route: '/software/embedded', icon: Cpu, tags: ['Arduino', 'Raspberry Pi 5'], status: 'concept' },
     ],
   },
   finance: {
@@ -41,7 +41,7 @@ export const categories: Record<CategoryKey, PortfolioCategory> = {
     projects: [
       { slug: 'sp500-heatmap', title: 'S&P 500 Heatmap', kicker: 'MARKET VISUALIZATION', description: 'Explore a treemap-style market view. The current color tiles are illustrative demo content, not live returns.', route: '/finance/sp500-heatmap', icon: ChartNoAxesCombined, tags: ['S&P 500', 'Heatmap'], status: 'demo' },
       { slug: 'indices-tracker', title: 'Indices Tracker', kicker: 'INDEX OVERVIEW', description: 'A dedicated screen for SPX, DJIA, IXIC, and RUT, ready for a live quote feed.', route: '/finance/indices-tracker', icon: Activity, tags: ['SPX', 'DJIA', 'IXIC', 'RUT'], status: 'demo' },
-      { slug: 'calculator', title: 'Pay Calculators', kicker: 'COMPENSATION TOOLS', description: 'Estimate salary take-home from an editable tax rate, or look up 2026 U.S. military base pay by grade and service bracket.', route: '/finance/calculator', icon: Calculator, tags: ['Gross → Net', 'Military Pay'], status: 'tool' },
+      { slug: 'calculator', title: 'Pay Calculators', kicker: 'COMPENSATION TOOLS', description: 'Estimate salary take-home from an editable tax rate, or build a 2026 U.S. military paycheck from basic pay, duty-station BAH, BAS, and state residence tax.', route: '/finance/calculator', icon: Calculator, tags: ['Gross → Net', 'Military Pay', 'BAH', 'BAS'], status: 'tool' },
     ],
   },
   healthcare: {
