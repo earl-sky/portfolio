@@ -15,7 +15,10 @@
 .route-main { min-height: 62vh; }
 .page-breadcrumb { display: flex; align-items: center; gap: 9px; padding: 25px 0 0; color: #5f6571; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; }
 .page-breadcrumb a { color: #8a8e9a; transition: color .15s; }
-.page-breadcrumb a:hover { color: var(--teal); }
+.page-breadcrumb a:hover { color: var(--red); }
+.page-breadcrumb a[href$="/finance"]:hover { color: var(--lime); }
+.page-breadcrumb a[href$="/healthcare"]:hover, .page-breadcrumb a[href$="/art"]:hover { color: var(--red); }
+.page-breadcrumb a[href$="/software"]:hover { color: var(--teal); }
 .route-hero { position: relative; min-height: 318px; display: grid; grid-template-columns: minmax(0,1fr) 300px; align-items: center; gap: 35px; padding: 46px 0 55px; border-bottom: 1px solid var(--line); }
 .route-hero-copy { max-width: 670px; }
 .route-hero-copy .section-kicker, .detail-copy .section-kicker { color: var(--teal); }
@@ -65,7 +68,7 @@
 .status-demo { border-color: rgba(208,219,84,.2); color: var(--lime); }
 .status-tool { border-color: rgba(68,210,197,.22); color: var(--teal); }
 .category-card-copy h3 { margin: 0 0 8px; color: #eef0f4; font-size: 16px; letter-spacing: -.035em; }
-.category-card-copy > p { min-height: 54px; margin: 0 0 14px; color: #8f949f; font-size: 10px; line-height: 1.7; }
+.category-card-copy > p { min-height: 54px; margin: 0 0 14px; color: #8f949f; font-size: 12px; line-height: 1.7; }
 .market-disclaimer { margin: 20px 0 0; color: #737987; font-family: var(--mono); font-size: 10px; line-height: 1.7; }
 
 .detail-hero { display: grid; grid-template-columns: 128px minmax(0,1fr); align-items: center; gap: 30px; padding: 63px 0 55px; border-bottom: 1px solid var(--line); }
@@ -73,6 +76,14 @@
 .detail-icon.lime-icon { border-color: rgba(208,219,84,.24); background: radial-gradient(circle at 50% 30%, rgba(208,219,84,.13), rgba(17,19,25,.75)); color: var(--lime); }
 .category-healthcare .detail-icon { border-color: rgba(239,70,83,.25); background: radial-gradient(circle at 50% 30%, rgba(239,70,83,.14), rgba(17,19,25,.75)); color: var(--red); }
 .category-healthcare .detail-copy .section-kicker { color: var(--red); }
+/* Theme accents must outrank the contextual kicker colours set above, otherwise
+   a plain `.lime-kicker` / `.red-kicker` loses to `.detail-copy .section-kicker`. */
+.detail-copy .section-kicker.lime-kicker,
+.route-hero-copy .section-kicker.lime-kicker,
+.section-kicker.lime-kicker { color: var(--lime); }
+.detail-copy .section-kicker.red-kicker,
+.route-hero-copy .section-kicker.red-kicker,
+.section-kicker.red-kicker { color: var(--red); }
 .detail-copy h1 { margin: 0 0 14px; font-size: clamp(38px, 5vw, 58px); }
 .detail-copy > p:not(.section-kicker) { max-width: 700px; margin: 0 0 17px; color: #9a9ea8; font-size: 13px; line-height: 1.8; }
 .detail-copy .section-kicker { margin-bottom: 11px; }
@@ -152,7 +163,7 @@
 .feed-status { color: #767c88; font-family: var(--mono); font-size: 9px; text-align: right; }
 
 .calculator-tabs { display: flex; gap: 8px; margin-top: 30px; border-bottom: 1px solid var(--line); }
-.calculator-tabs button { position: relative; padding: 12px 14px; border: 1px solid transparent; border-bottom: 0; border-radius: 4px 4px 0 0; background: transparent; color: #8b909d; font-size: 10px; cursor: pointer; }
+.calculator-tabs button { position: relative; padding: 12px 14px; border: 1px solid transparent; border-bottom: 0; border-radius: 4px 4px 0 0; background: transparent; color: #8b909d; font-size: 12px; cursor: pointer; }
 .calculator-tabs button.selected { border-color: #2a2f3a; background: #14171e; color: #f2f3f6; }
 .calculator-tabs button.selected::after { position: absolute; right: 10px; bottom: -1px; left: 10px; height: 2px; content: ''; background: var(--lime); }
 .calculator-panel { margin-top: 0; border-top-left-radius: 0; }
@@ -204,19 +215,20 @@
 .resume-header { display: grid; grid-template-columns: minmax(0,1fr) 220px; gap: 30px; padding-bottom: 25px; border-bottom: 2px solid #20242a; }
 .resume-label { margin: 0 0 9px; color: #b83844; font: 10px var(--mono); letter-spacing: .1em; }
 .resume-header h1 { margin: 0 0 10px; color: #16191e; font-size: clamp(40px,6vw,60px); line-height: 1; }
-.resume-summary { max-width: 610px; margin: 0; color: #555a63; font-size: 11px; line-height: 1.7; }
-.resume-contact { display: flex; flex-direction: column; gap: 8px; align-self: center; color: #424750; font: 9px var(--mono); }
+.resume-summary { max-width: 610px; margin: 0; color: #555a63; font-size: 13px; line-height: 1.7; }
+.resume-contact { display: flex; flex-direction: column; gap: 8px; align-self: center; color: #424750; font: 11px var(--mono); }
 .resume-section { padding: 22px 0 3px; }
 .resume-section h2 { margin: 0 0 14px; color: #b83844; font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.resume-section > p { margin: 0; color: #555a63; font-size: 11px; line-height: 1.65; }
 .resume-entry { display: grid; grid-template-columns: 225px minmax(0,1fr); gap: 20px; padding: 12px 0; border-top: 1px solid #d9dbd8; }
-.resume-entry h3 { margin: 0 0 5px; color: #20242b; font-size: 11px; }
-.resume-entry p { margin: 0; color: #555a63; font-size: 9px; line-height: 1.65; }
-.resume-entry .resume-meta { color: #797e86; font: 10px var(--mono); }
-.resume-bullets { margin: 0; padding-left: 16px; color: #555a63; font-size: 9px; line-height: 1.65; }
+.resume-entry h3 { margin: 0 0 5px; color: #20242b; font-size: 13px; }
+.resume-entry p { margin: 0; color: #555a63; font-size: 11px; line-height: 1.65; }
+.resume-entry .resume-meta { color: #797e86; font: 12px var(--mono); }
+.resume-bullets { margin: 0; padding-left: 16px; color: #555a63; font-size: 11px; line-height: 1.65; }
 .resume-bullets li + li { margin-top: 5px; }
 .resume-entry > .resume-bullets { align-self: start; }
 .resume-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-.resume-columns p { color: #555a63; font-size: 9px; line-height: 1.7; }
+.resume-columns p { color: #555a63; font-size: 11px; line-height: 1.7; }
 .resume-edit-note { margin: 18px 0 0; padding-top: 12px; border-top: 1px dashed #c3c6c3; color: #8c4c50; font: 10px var(--mono); }
 
 @media (max-width: 760px) {
@@ -272,7 +284,7 @@
   .index-list-heading, .index-row { grid-template-columns: 51px minmax(0,1fr); gap: 8px; }
   .index-list-heading span:last-child { display: none; }
   .feed-status { grid-column: 2; text-align: left; }
-  .calculator-tabs button { padding-inline: 9px; font-size: 10px; }
+  .calculator-tabs button { padding-inline: 9px; font-size: 12px; }
   .calculator-form-grid, .military-form-grid { grid-template-columns: 1fr; }
   .military-station-field { grid-column: auto; }
   .salary-results { grid-template-columns: 1fr 1fr; }

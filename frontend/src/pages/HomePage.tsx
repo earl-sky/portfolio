@@ -17,18 +17,6 @@ const experience = [
   { period: 'EDUCATION', role: 'Education / Independent Work', organization: 'Western Governors University · Community College of the Air Force', detail: 'BS Software Engineering (Java), 2026 · AAS Pharmacy Technology, 2017 · Front End Web Development WGU Certificate, Mar 2024 · AWS Certified Cloud Practitioner · ITIL Foundation · CompTIA Project+ · Series 65 in progress.' },
 ];
 
-const skillGroups = [
-  { title: 'Core languages', skills: ['Java', 'TypeScript', 'SQL', 'HTML / CSS'] },
-  { title: 'Frameworks & runtime', skills: ['React', 'Spring Boot', 'Vite', 'Node.js'] },
-  { title: 'Infrastructure & tools', skills: ['MySQL', 'Docker', 'Docker Compose', 'REST APIs'] },
-];
-
-const activityRows = [
-  '001221011230012101212010', '012332212341123201123321', '001120122231012210123210',
-  '123201123442231012332101', '012210011231201123210012', '001232012210123321012201',
-  '012101223210012321102330',
-];
-
 // cmatrix-style falling columns: a trail of glyphs led by a single brighter head
 // character at the leading edge. Glyphs are deterministic so columns do not reshuffle.
 const matrixCharsets = {
@@ -106,8 +94,38 @@ function MatrixField({ offset, charset }: { offset: number; charset: MatrixChars
   }, [charset]);
 
   useEffect(() => {
-    const id = window.setInterval(() => setTick((value) => value + 1), matrixFrameMs);
-    return () => window.clearInterval(id);
+    const field = fieldRef.current;
+    if (!field) return;
+
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = !('IntersectionObserver' in window);
+    let interval: number | null = null;
+    const syncAnimation = () => {
+      const active = visible && !motionPreference.matches;
+      field.classList.toggle('is-active', active);
+      if (active && interval === null) {
+        interval = window.setInterval(() => setTick((value) => value + 1), matrixFrameMs);
+      } else if (!active && interval !== null) {
+        window.clearInterval(interval);
+        interval = null;
+      }
+    };
+
+    const observer = 'IntersectionObserver' in window
+      ? new IntersectionObserver(([entry]) => {
+          visible = entry.isIntersecting;
+          syncAnimation();
+        }, { threshold: 0.05 })
+      : null;
+    observer?.observe(field);
+    motionPreference.addEventListener('change', syncAnimation);
+    syncAnimation();
+
+    return () => {
+      observer?.disconnect();
+      motionPreference.removeEventListener('change', syncAnimation);
+      if (interval !== null) window.clearInterval(interval);
+    };
   }, []);
 
   const columns = useMemo(() => {
@@ -250,15 +268,6 @@ export default function HomePage() {
         <div className="timeline">{experience.map((item) => <article className="timeline-row" key={item.period}><p className="timeline-date">{item.period}</p><div className="timeline-copy"><h3>{item.role}</h3><p className="timeline-org">{item.organization}</p><p className="timeline-detail">{item.detail}</p></div><span className="timeline-arrow" aria-hidden="true">↗</span></article>)}</div>
       </section>
 
-      <section className="content-section skills-section" aria-labelledby="skills-title">
-        <div className="section-heading"><div><p className="section-kicker red-kicker">TOOLS I BUILD WITH</p><h2 id="skills-title">Skill matrix &amp; comfort</h2></div><span className="section-index">03 / TOOLKIT</span></div>
-        <div className="skills-grid">{skillGroups.map((group) => <article className="skill-card" key={group.title}><h3>{group.title}</h3><div className="skill-list">{group.skills.map((skill) => <span className="skill-chip" key={skill}>{skill}</span>)}</div></article>)}</div>
-      </section>
-
-      <section className="content-section activity-section" aria-labelledby="activity-title">
-        <div className="activity-copy"><p className="section-kicker lime-kicker">OPEN SOURCE · ACTIVITY</p><h2 id="activity-title">Good software is a team sport.</h2><p>Interested in clean systems, useful tools, and the small details that make products feel effortless.</p><p className="activity-note">The contribution grid is a visual placeholder. Pending a GitHub profile to show real activity.</p><Link className="button-text" to="/about">MORE ABOUT ME <span aria-hidden="true">→</span></Link></div>
-        <div className="activity-card" aria-label="Illustrative contribution grid preview"><div className="activity-card-top"><span>CONTRIBUTION ACTIVITY</span><span className="preview-label">PREVIEW</span></div><div className="heatmap" aria-hidden="true">{activityRows.map((row, rowIndex) => <div className="heatmap-row" key={rowIndex}>{[...row].map((level, columnIndex) => <span className={`heat-cell level-${level}`} key={`${rowIndex}-${columnIndex}`} />)}</div>)}</div><div className="heatmap-legend"><span>Illustrative only</span><span>LESS <i className="level-0" /><i className="level-1" /><i className="level-2" /><i className="level-3" /><i className="level-4" /> MORE</span></div></div>
-      </section>
       <section className="contact-band"><span className="contact-dot" /><p>Open to building something thoughtful together.</p><Link className="contact-placeholder" to="/about">Résumé →</Link></section>
     </main>
   );

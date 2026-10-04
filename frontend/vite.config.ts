@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { audioTracksPlugin } from './vite-plugin-audio-tracks';
+import { audioTracksPlugin } from './vite-plugin-audio-tracks.ts';
 
 export default defineConfig({
   plugins: [react(), audioTracksPlugin()],
