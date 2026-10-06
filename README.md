@@ -9,7 +9,7 @@ A responsive multi-page portfolio built with **React + TypeScript**, **Java 21 /
 - `/software/task-to-do`, `/software/ai-reference`, `/software/edge-ai`, `/software/embedded`, `/software/api-observability` — Software projects.
 - `/finance/sp500-heatmap`, `/finance/indices-tracker`, `/finance/calculator` — Finance projects.
 - `/healthcare/care-team`, `/healthcare/health-insights`, `/healthcare/medication-planner`, `/healthcare/eve-chemo`, `/healthcare/queue-eve-ivs`, `/healthcare/baxter-ivp-exp` — Healthcare projects.
-- `/art/digital-gallery`, `/art/generative-studies`, `/art/interactive-sketchbook`, `/art/creative-toolkit`, `/art/effects-patterns` — Art projects.
+- `/art/terminal-art`, `/art/creative-toolkit`, `/art/effects-patterns` — Art projects.
 - Project slots have explicit routes and render the shared placeholder detail page until project content is added.
 - `/finance/calculator` — gross-to-net estimate and a 2026 U.S. military compensation estimate (basic pay, BAH by duty station, BAS, and state residence tax).
 - `/software/ai-reference` — searchable, tiered model table; official links appear only where first-party sources confirm a match.
