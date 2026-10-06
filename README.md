@@ -9,7 +9,7 @@ A responsive multi-page portfolio built with **React + TypeScript**, **Java 21 /
 - `/software/task-to-do`, `/software/ai-reference`, `/software/edge-ai`, `/software/embedded`, `/software/api-observability` — Software projects.
 - `/finance/sp500-heatmap`, `/finance/indices-tracker`, `/finance/calculator` — Finance projects.
 - `/healthcare/care-team`, `/healthcare/health-insights`, `/healthcare/medication-planner`, `/healthcare/eve-chemo`, `/healthcare/queue-eve-ivs`, `/healthcare/baxter-ivp-exp` — Healthcare projects.
-- `/art/digital-gallery`, `/art/generative-studies`, `/art/interactive-sketchbook` — Art projects.
+- `/art/digital-gallery`, `/art/generative-studies`, `/art/interactive-sketchbook`, `/art/creative-toolkit`, `/art/effects-patterns` — Art projects.
 - Project slots have explicit routes and render the shared placeholder detail page until project content is added.
 - `/finance/calculator` — gross-to-net estimate and a 2026 U.S. military compensation estimate (basic pay, BAH by duty station, BAS, and state residence tax).
 - `/software/ai-reference` — searchable, tiered model table; official links appear only where first-party sources confirm a match.
@@ -17,6 +17,8 @@ A responsive multi-page portfolio built with **React + TypeScript**, **Java 21 /
 - `/healthcare/queue-eve-ivs` — source workflow details plus the four supplied PowerShell text blocks, shown collapsed as display-only content; no macro is executed.
 - `/healthcare/baxter-ivp-exp` — supplied medication names and storage intervals with illustrative dates calculated from the viewer's current local date; source values and date projections are unverified and not clinical guidance.
 - `/about` — editable résumé template; use Print / Save PDF to export.
+- `/art/creative-toolkit` — red-themed Art reference page linking PICO-8, PuzzleScript, the Twine Cookbook, Twine 2 docs, Bitsy docs, Lospec, and LibreSprite (external links open in a new tab).
+- `/art/effects-patterns` — red-themed Art reference page linking The Ladybug browser effects studio and Book of Shapes (external links open in a new tab).
 
 The weather rail shows current conditions for Las Vegas, Palo Alto, San Francisco, Seattle, Dallas, Miami, Dededo, and Baguio City. Each tile includes Fahrenheit/Celsius readings and a local clock with timezone abbreviation and UTC offset.
 

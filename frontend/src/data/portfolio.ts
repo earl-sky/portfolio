@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, ClipboardList, Cpu, Image, Palette, Pill, Sparkles, Terminal } from 'lucide-react';
+import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, ClipboardList, Cpu, Gamepad2, Image, Palette, Pill, Shapes, Sparkles, Terminal } from 'lucide-react';
 
 export type CategoryKey = 'software' | 'finance' | 'healthcare' | 'art';
 export type ProjectStatus = 'concept' | 'demo' | 'tool';
@@ -63,6 +63,8 @@ export const categories: Record<CategoryKey, PortfolioCategory> = {
       { slug: 'generative-studies', title: 'Generative Studies', kicker: 'CREATIVE CODE', description: 'A concept slot for procedural art, generative forms, and code-led visual experiments.', route: '/art/generative-studies', icon: Sparkles, tags: ['Generative', 'Code'], status: 'concept' },
       { slug: 'interactive-sketchbook', title: 'Interactive Sketchbook', kicker: 'PLAY / INTERACTION', description: 'A concept slot for small interactive pieces, sketches, and playful browser experiments.', route: '/art/interactive-sketchbook', icon: Palette, tags: ['Interactive', 'Experiments'], status: 'concept' },
       { slug: 'terminal-art', title: 'Terminal Art', kicker: 'COMMAND-LINE VISUALS', description: 'A collection of terminal-native animations, ASCII art, audio visualizers, and system dashboards for macOS.', route: '/art/terminal-art', icon: Terminal, tags: ['Homebrew', 'ASCII', 'Terminal'], status: 'concept' },
+      { slug: 'creative-toolkit', title: 'Creative Toolkit', kicker: 'GAMES / PIXEL ART / INTERACTIVE FICTION', description: 'A red-themed reference page linking official sites for PICO-8, PuzzleScript, Twine, Bitsy, Lospec, and LibreSprite.', route: '/art/creative-toolkit', icon: Gamepad2, tags: ['Game dev', 'Pixel art', 'Twine'], status: 'tool' },
+      { slug: 'effects-patterns', title: 'Effects & Patterns', kicker: 'EFFECTS / GENERATIVE PATTERNS', description: 'A red-themed reference page linking The Ladybug browser effects studio and the Book of Shapes generative SVG pattern library.', route: '/art/effects-patterns', icon: Shapes, tags: ['Effects', 'SVG patterns'], status: 'tool' },
     ],
   },
 };

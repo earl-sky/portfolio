@@ -264,7 +264,7 @@ export default function HomePage() {
       </section>
 
       <section className="content-section experience-section" aria-labelledby="experience-title">
-        <div className="section-heading"><div><p className="section-kicker lime-kicker">WORK · LEARNING · MOMENTUM</p><h2 id="experience-title">Chronological career path</h2></div><span className="section-index">02 / EXPERIENCE</span></div>
+        <div className="section-heading"><div><p className="section-kicker lime-kicker">WORK · LEARNING · MOMENTUM</p><h2 id="experience-title">Chronological Career Path</h2></div><span className="section-index">02 / EXPERIENCE</span></div>
         <div className="timeline">{experience.map((item) => <article className="timeline-row" key={item.period}><p className="timeline-date">{item.period}</p><div className="timeline-copy"><h3>{item.role}</h3><p className="timeline-org">{item.organization}</p><p className="timeline-detail">{item.detail}</p></div><span className="timeline-arrow" aria-hidden="true">↗</span></article>)}</div>
       </section>
 

@@ -8,6 +8,8 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const AIReferencePage = lazy(() => import('./pages/AIReferencePage'));
 const BaxterIVPExpPage = lazy(() => import('./pages/BaxterIVPExpPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
+const CreativeToolkitPage = lazy(() => import('./pages/CreativeToolkitPage'));
+const EffectsPatternsPage = lazy(() => import('./pages/EffectsPatternsPage'));
 const EveChemoPage = lazy(() => import('./pages/EveChemoPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const QueueEveIVsPage = lazy(() => import('./pages/QueueEveIVsPage'));
@@ -50,6 +52,8 @@ function RouteContent() {
           <Route path="/art/generative-studies" element={<ProjectRoutePage />} />
           <Route path="/art/interactive-sketchbook" element={<ProjectRoutePage />} />
           <Route path="/art/terminal-art" element={<ProjectRoutePage projectCategory="art" projectSlug="terminal-art" />} />
+          <Route path="/art/creative-toolkit" element={<CreativeToolkitPage />} />
+          <Route path="/art/effects-patterns" element={<EffectsPatternsPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
