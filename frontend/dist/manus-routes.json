@@ -20,9 +20,6 @@
     { "path": "/healthcare/eve-chemo", "title": "Eve Chemo" },
     { "path": "/healthcare/queue-eve-ivs", "title": "Queue Eve IVs" },
     { "path": "/healthcare/baxter-ivp-exp", "title": "Baxter IVP exp" },
-    { "path": "/art/digital-gallery", "title": "Digital Gallery" },
-    { "path": "/art/generative-studies", "title": "Generative Studies" },
-    { "path": "/art/interactive-sketchbook", "title": "Interactive Sketchbook" },
     { "path": "/art/creative-toolkit", "title": "Creative Toolkit" },
     { "path": "/art/effects-patterns", "title": "Effects & Patterns" }
   ]

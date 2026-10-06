@@ -48,9 +48,6 @@ function RouteContent() {
           <Route path="/healthcare/baxter-ivp-exp" element={<BaxterIVPExpPage />} />
 
           {/* Art projects, in portfolio order */}
-          <Route path="/art/digital-gallery" element={<ProjectRoutePage />} />
-          <Route path="/art/generative-studies" element={<ProjectRoutePage />} />
-          <Route path="/art/interactive-sketchbook" element={<ProjectRoutePage />} />
           <Route path="/art/terminal-art" element={<ProjectRoutePage projectCategory="art" projectSlug="terminal-art" />} />
           <Route path="/art/creative-toolkit" element={<CreativeToolkitPage />} />
           <Route path="/art/effects-patterns" element={<EffectsPatternsPage />} />
