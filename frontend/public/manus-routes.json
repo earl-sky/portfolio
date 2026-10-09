@@ -2,6 +2,7 @@
   "routes": [
     { "path": "/", "title": "Home" },
     { "path": "/software", "title": "Software" },
+    { "path": "/hardware", "title": "Hardware" },
     { "path": "/finance", "title": "Finance" },
     { "path": "/healthcare", "title": "Healthcare" },
     { "path": "/art", "title": "Art" },
@@ -9,7 +10,8 @@
     { "path": "/software/task-to-do", "title": "Task To Do" },
     { "path": "/software/ai-reference", "title": "AI Reference" },
     { "path": "/software/edge-ai", "title": "Edge AI Projx" },
-    { "path": "/software/embedded", "title": "Embedded Projx" },
+    { "path": "/hardware/arduino-alvik", "title": "Arduino Alvik" },
+    { "path": "/hardware/embedded", "title": "Embedded Projx" },
     { "path": "/software/api-observability", "title": "API Observability" },
     { "path": "/finance/sp500-heatmap", "title": "S&P 500 Heatmap" },
     { "path": "/finance/indices-tracker", "title": "Indices Tracker" },

@@ -19,28 +19,33 @@
 .page-breadcrumb a[href$="/finance"]:hover { color: var(--lime); }
 .page-breadcrumb a[href$="/healthcare"]:hover, .page-breadcrumb a[href$="/art"]:hover { color: var(--red); }
 .page-breadcrumb a[href$="/software"]:hover { color: var(--teal); }
+.page-breadcrumb a[href$="/hardware"]:hover { color: var(--purple); }
 .route-hero { position: relative; min-height: 318px; display: grid; grid-template-columns: minmax(0,1fr) 300px; align-items: center; gap: 35px; padding: 46px 0 55px; border-bottom: 1px solid var(--line); }
 .route-hero-copy { max-width: 670px; }
 .route-hero-copy .section-kicker, .detail-copy .section-kicker { color: var(--teal); }
 .category-finance .route-hero-copy .section-kicker, .lime-kicker { color: var(--lime); }
 .category-healthcare .route-hero-copy .section-kicker { color: var(--red); }
 .category-art .route-hero-copy .section-kicker { color: var(--red); }
+.category-hardware .route-hero-copy .section-kicker { color: var(--purple); }
 .route-hero h1 { max-width: 760px; margin: 0 0 18px; font-size: clamp(39px, 5vw, 61px); line-height: 1.02; }
 .route-hero-copy > p:last-child { max-width: 580px; margin: 0; color: #979ba5; font-size: 13px; line-height: 1.8; }
 .route-hero-symbol { position: relative; width: 220px; height: 220px; justify-self: end; display: grid; place-items: center; border: 1px solid rgba(68,210,197,.16); border-radius: 50%; background: radial-gradient(circle, rgba(68,210,197,.14), rgba(12,16,22,.08) 63%, transparent 65%); }
 .category-finance .route-hero-symbol { border-color: rgba(208,219,84,.18); background: radial-gradient(circle, rgba(208,219,84,.13), transparent 67%); }
 .category-healthcare .route-hero-symbol { border-color: rgba(239,70,83,.18); background: radial-gradient(circle, rgba(239,70,83,.13), transparent 67%); }
 .category-art .route-hero-symbol { border-color: rgba(239,70,83,.18); background: radial-gradient(circle, rgba(239,70,83,.13), transparent 67%); }
+.category-hardware .route-hero-symbol { border-color: rgba(169,112,255,.18); background: radial-gradient(circle, rgba(169,112,255,.13), transparent 67%); }
 .symbol-orbit { position: absolute; inset: 18px; border: 1px solid rgba(68,210,197,.16); border-radius: 50%; }
 .orbit-two { inset: 42px; border-style: dashed; transform: rotate(-24deg); }
 .symbol-core { width: 86px; height: 86px; display: grid; place-items: center; border: 1px solid rgba(68,210,197,.4); border-radius: 24px; background: rgba(12,22,27,.86); color: var(--teal); font-size: 44px; font-weight: 800; letter-spacing: -.08em; box-shadow: 0 0 45px rgba(68,210,197,.1); }
 .category-finance .symbol-core { border-color: rgba(208,219,84,.42); background: rgba(25,27,18,.8); color: var(--lime); }
 .category-healthcare .symbol-core { border-color: rgba(239,70,83,.42); background: rgba(27,17,21,.8); color: var(--red); }
 .category-art .symbol-core { border-color: rgba(239,70,83,.42); background: rgba(27,17,21,.8); color: var(--red); }
+.category-hardware .symbol-core { border-color: rgba(169,112,255,.42); background: rgba(23,18,32,.8); color: var(--purple); }
 .symbol-cross { position: absolute; top: 31px; right: 34px; color: var(--teal); font-family: var(--mono); font-size: 18px; }
 .category-finance .symbol-cross { color: var(--lime); }
 .category-healthcare .symbol-cross { color: var(--red); }
 .category-art .symbol-cross { color: var(--red); }
+.category-hardware .symbol-cross { color: var(--purple); }
 .route-section { padding: 55px 0 68px; }
 .route-section .section-heading { margin-bottom: 22px; }
 .category-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 15px; }
@@ -49,6 +54,7 @@
 .category-finance .category-project-card:hover { border-color: rgba(208,219,84,.45); }
 .category-healthcare .category-project-card:hover { border-color: rgba(239,70,83,.42); }
 .category-art .category-project-card:hover { border-color: rgba(239,70,83,.42); }
+.category-hardware .category-project-card:hover { border-color: rgba(169,112,255,.45); }
 .category-card-visual { position: relative; min-height: 164px; display: grid; place-items: center; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.06); background: radial-gradient(ellipse at 50% 110%, rgba(68,210,197,.15), transparent 56%), linear-gradient(135deg, #101821, #11141b); color: var(--teal); }
 .category-card-visual::before, .category-card-visual::after { position: absolute; width: 160px; height: 160px; content: ''; border: 1px solid rgba(68,210,197,.10); border-radius: 50%; }
 .category-card-visual::after { width: 118px; height: 118px; border-style: dashed; transform: rotate(20deg); }
@@ -58,6 +64,8 @@
 .category-healthcare .category-card-visual::before, .category-healthcare .category-card-visual::after { border-color: rgba(239,70,83,.12); }
 .category-art .category-card-visual { color: #f06b77; background: radial-gradient(ellipse at 50% 110%, rgba(239,70,83,.14), transparent 56%), linear-gradient(135deg, #1c141b, #11141b); }
 .category-art .category-card-visual::before, .category-art .category-card-visual::after { border-color: rgba(239,70,83,.12); }
+.category-hardware .category-card-visual { color: var(--purple); background: radial-gradient(ellipse at 50% 110%, rgba(169,112,255,.14), transparent 56%), linear-gradient(135deg, #181327, #11141b); }
+.category-hardware .category-card-visual::before, .category-hardware .category-card-visual::after { border-color: rgba(169,112,255,.12); }
 .category-card-visual > svg:not(.card-open-icon) { position: relative; z-index: 1; filter: drop-shadow(0 0 18px currentColor); }
 .card-index { position: absolute; top: 13px; left: 14px; color: rgba(220,225,235,.5); font-family: var(--mono); font-size: 10px; }
 .card-open-icon { position: absolute; right: 13px; bottom: 13px; color: #8b919d; transition: transform .18s, color .18s; }
@@ -76,7 +84,11 @@
 .detail-icon.lime-icon { border-color: rgba(208,219,84,.24); background: radial-gradient(circle at 50% 30%, rgba(208,219,84,.13), rgba(17,19,25,.75)); color: var(--lime); }
 .category-healthcare .detail-icon { border-color: rgba(239,70,83,.25); background: radial-gradient(circle at 50% 30%, rgba(239,70,83,.14), rgba(17,19,25,.75)); color: var(--red); }
 .category-art .detail-icon { border-color: rgba(239,70,83,.25); background: radial-gradient(circle at 50% 30%, rgba(239,70,83,.14), rgba(17,19,25,.75)); color: var(--red); }
+.category-hardware .detail-icon { border-color: rgba(169,112,255,.25); background: radial-gradient(circle at 50% 30%, rgba(169,112,255,.16), rgba(17,19,25,.75)); color: var(--purple); }
 .category-healthcare .detail-copy .section-kicker { color: var(--red); }
+.category-hardware .detail-copy .section-kicker { color: var(--purple); }
+.category-hardware .tech-tag { border-color: rgba(169,112,255,.25); color: #c4b0ef; }
+.category-hardware .detail-placeholder-grid span { color: var(--purple); }
 /* Theme accents must outrank the contextual kicker colours set above, otherwise
    a plain `.lime-kicker` / `.red-kicker` loses to `.detail-copy .section-kicker`. */
 .detail-copy .section-kicker.lime-kicker,
@@ -85,6 +97,9 @@
 .detail-copy .section-kicker.red-kicker,
 .route-hero-copy .section-kicker.red-kicker,
 .section-kicker.red-kicker { color: var(--red); }
+.detail-copy .section-kicker.purple-kicker,
+.route-hero-copy .section-kicker.purple-kicker,
+.section-kicker.purple-kicker { color: var(--purple); }
 .detail-copy h1 { margin: 0 0 14px; font-size: clamp(38px, 5vw, 58px); }
 .detail-copy > p:not(.section-kicker) { max-width: 700px; margin: 0 0 17px; color: #9a9ea8; font-size: 13px; line-height: 1.8; }
 .detail-copy .section-kicker { margin-bottom: 11px; }
@@ -139,10 +154,18 @@
 /* Red theme for reference shelves inside Art pages (e.g. /art/creative-toolkit). */
 .category-art .reference-item a:hover { color: var(--red); }
 .category-art .reference-item a:hover h3 svg { color: var(--red); }
+/* Purple theme for reference shelves inside Hardware pages (/hardware/arduino-alvik). */
+.category-hardware .reference-item a:hover { color: var(--purple); }
+.category-hardware .reference-item a:hover h3 svg { color: var(--purple); }
 /* Dedicated Art reference pages (/art/creative-toolkit, /art/effects-patterns):
    the description copy under each link reads two steps larger than the shared
    9px shelf default (9px -> 11px) so the longer blurbs stay comfortable. */
 .art-reference-page .reference-item > p { font-size: 11px; }
+.hardware-reference-page .reference-item > p { font-size: 11px; }
+.software-reference-page .reference-item > p { font-size: 11px; }
+/* Cyan/teal theme for the SWEng Interview reference shelf headings. */
+.software-reference-page .reference-shelf-heading .section-kicker,
+.software-reference-page .reference-shelf-heading h2 { color: var(--teal); }
 /* When a reference shelf directly follows the detail hero, skip the duplicate rule. */
 .detail-hero + .reference-shelf { border-top: 0; padding-top: 34px; }
 .embedded-reference { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 20px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.09); border-bottom: 1px solid rgba(255,255,255,.09); }

@@ -5,8 +5,9 @@ A responsive multi-page portfolio built with **React + TypeScript**, **Java 21 /
 ## Routes
 
 - `/` — portfolio homepage with a TradingView ticker tape above the eight-city weather rail.
-- `/software`, `/finance`, `/healthcare`, `/art`, `/about` — category pages and résumé page.
-- `/software/task-to-do`, `/software/ai-reference`, `/software/edge-ai`, `/software/embedded`, `/software/api-observability` — Software projects.
+- `/software`, `/hardware`, `/finance`, `/healthcare`, `/art`, `/about` — category pages and résumé page.
+- `/software/task-to-do`, `/software/ai-reference`, `/software/edge-ai`, `/software/api-observability`, `/software/sweng-interview` — Software projects.
+- `/hardware/arduino-alvik`, `/hardware/embedded` — Hardware projects.
 - `/finance/sp500-heatmap`, `/finance/indices-tracker`, `/finance/calculator` — Finance projects.
 - `/healthcare/care-team`, `/healthcare/health-insights`, `/healthcare/medication-planner`, `/healthcare/eve-chemo`, `/healthcare/queue-eve-ivs`, `/healthcare/baxter-ivp-exp` — Healthcare projects.
 - `/art/terminal-art`, `/art/creative-toolkit`, `/art/effects-patterns` — Art projects.

@@ -15,6 +15,7 @@
   --red: #ef4653;
   --teal: #44d2c5;
   --lime: #d0db54;
+  --purple: #a970ff;
   --mono: 'DM Mono', 'SFMono-Regular', Consolas, monospace;
 }
 
@@ -60,6 +61,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--teal); outline-
 .nav-dropdown-software .nav-dropdown-main a:hover, .nav-dropdown-software .nav-dropdown-main a.active { color: var(--teal); }
 .nav-dropdown-finance .nav-dropdown-main a:hover, .nav-dropdown-finance .nav-dropdown-main a.active { color: var(--lime); }
 .nav-dropdown-healthcare .nav-dropdown-main a:hover, .nav-dropdown-healthcare .nav-dropdown-main a.active { color: var(--red); }
+.nav-dropdown-hardware .nav-dropdown-main a:hover, .nav-dropdown-hardware .nav-dropdown-main a.active { color: var(--purple); }
 
 .hero-section { min-height: 470px; display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: clamp(38px, 7vw, 90px); padding: 74px 0 90px; }
 .hero-copy { max-width: 580px; }
@@ -104,6 +106,7 @@ h1 { max-width: 620px; margin-bottom: 21px; color: #f4f4f6; font-size: clamp(42p
 .section-kicker { margin-bottom: 10px; font-size: 12px; letter-spacing: .12em; }
 .red-kicker { color: var(--red); }
 .lime-kicker { color: var(--lime); }
+.purple-kicker { color: var(--purple); }
 .section-heading h2 { margin-bottom: 0; color: #f0f1f4; font-size: clamp(23px, 2.7vw, 30px); font-weight: 750; letter-spacing: -.045em; }
 .section-index { padding-bottom: 3px; color: #666b77; font-size: 12px; letter-spacing: .1em; }
 .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }

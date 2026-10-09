@@ -136,7 +136,7 @@ export function ProjectRoutePage({ projectCategory, projectSlug }: { projectCate
   if (!project || !category) return <NotFoundPage />;
   const categoryLabel = categories[category as CategoryKey]?.label ?? category;
   const categoryData = categories[category as CategoryKey];
-  const kickerColorClass = categoryData?.accent === 'lime' ? 'lime-kicker' : categoryData?.accent === 'red' ? 'red-kicker' : '';
+  const kickerColorClass = categoryData?.accent === 'lime' ? 'lime-kicker' : categoryData?.accent === 'red' ? 'red-kicker' : categoryData?.accent === 'purple' ? 'purple-kicker' : '';
   const Icon = project.icon;
   return (
     <main className={`route-main project-detail-page category-${category}`}>

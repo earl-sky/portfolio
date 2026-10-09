@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
-import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, ClipboardList, Cpu, Gamepad2, Pill, Shapes, Terminal } from 'lucide-react';
+import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, CircuitBoard, ClipboardList, Cpu, Gamepad2, MessagesSquare, Pill, Shapes, Terminal } from 'lucide-react';
 
-export type CategoryKey = 'software' | 'finance' | 'healthcare' | 'art';
+export type CategoryKey = 'software' | 'hardware' | 'finance' | 'healthcare' | 'art';
 export type ProjectStatus = 'concept' | 'demo' | 'tool';
 export type PortfolioProject = {
   slug: string;
@@ -27,11 +27,20 @@ export const categories: Record<CategoryKey, PortfolioCategory> = {
   software: {
     key: 'software', label: 'Software', eyebrow: 'SOFTWARE / SELECTED BUILDS',
     title: 'Interfaces, systems, and the code between.', accent: 'teal',
-    description: 'A home for application software, artificial intelligence, and embedded systems projects.',
+    description: 'A home for application software, artificial intelligence, and interview-prep reference tools.',
     projects: [
       { slug: 'task-to-do', title: 'Task To Do', kicker: 'PRODUCTIVITY', description: 'A project slot for a focused task planner. Add your workflow, demo, and engineering decisions.', route: '/software/task-to-do', icon: ClipboardList, tags: ['React', 'TypeScript'], status: 'concept' },
       { slug: 'ai-reference', title: 'AI Reference', kicker: 'ARTIFICIAL INTELLIGENCE / MODEL DIRECTORY', description: 'A tiered model directory using the supplied list, with official links only where a first-party source confirms the model.', route: '/software/ai-reference', icon: BrainCircuit, tags: ['32 models', 'Official links'], status: 'demo' },
-      { slug: 'embedded', title: 'Embedded Projx', kicker: 'EMBEDDED SYSTEMS', description: 'Arduino and Raspberry Pi 5 projects covering firmware, sensors, hardware integration, and small Linux-based builds.', route: '/software/embedded', icon: Cpu, tags: ['Arduino', 'Raspberry Pi 5'], status: 'concept' },
+      { slug: 'sweng-interview', title: 'SWEng Interview', kicker: 'INTERVIEW PREP / REFERENCE SHELF', description: 'A teal-themed reference shelf for software engineering interview prep: LeetCode 75 for coding practice, system design Q&A, and the most common behavioral questions.', route: '/software/sweng-interview', icon: MessagesSquare, tags: ['Coding', 'System design', 'Behavioral'], status: 'tool' },
+    ],
+  },
+  hardware: {
+    key: 'hardware', label: 'Hardware', eyebrow: 'HARDWARE / ROBOTICS BUILDS',
+    title: 'Circuits, sensors, and code you can hold.', accent: 'purple',
+    description: 'Robotics and embedded hardware projects built around official Arduino boards, sensors, and documentation.',
+    projects: [
+      { slug: 'arduino-alvik', title: 'Arduino Alvik', kicker: 'ROBOTICS / EDUCATIONAL HARDWARE', description: 'Arduino’s Nano 33 BLE Sense robotics kit — time-of-flight distance, RGB colour, 6-axis IMU, and line-following sensors — programmed in MicroPython or Arduino code.', route: '/hardware/arduino-alvik', icon: CircuitBoard, tags: ['Arduino Alvik', 'MicroPython', 'Nano 33 BLE'], status: 'tool' },
+      { slug: 'embedded', title: 'Embedded Projx', kicker: 'EMBEDDED SYSTEMS', description: 'Arduino and Raspberry Pi 5 projects covering firmware, sensors, hardware integration, and small Linux-based builds.', route: '/hardware/embedded', icon: Cpu, tags: ['Arduino', 'Raspberry Pi 5'], status: 'concept' },
     ],
   },
   finance: {

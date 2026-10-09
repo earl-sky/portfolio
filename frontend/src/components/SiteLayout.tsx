@@ -212,7 +212,7 @@ function GlobalFooter() {
     <footer className="site-footer">
       <div className="footer-brand"><Link className="wordmark" to="/">EarlSky<span>.dev</span></Link><p>Software engineer · building interfaces and systems.</p></div>
       <div className="footer-links">
-        <Link to="/software">Software</Link><Link to="/finance">Finance</Link><Link to="/healthcare">Healthcare</Link><Link to="/art">Art</Link><Link to="/about">About</Link>
+        <Link to="/software">Software</Link><Link to="/hardware">Hardware</Link><Link to="/finance">Finance</Link><Link to="/healthcare">Healthcare</Link><Link to="/art">Art</Link><Link to="/about">About</Link>
       </div>
       <div className="footer-bottom"><span>© 2026 EarlSky. Built with React, Spring Boot &amp; Docker.</span><Link to="/">BACK TO TOP ↑</Link></div>
     </footer>
@@ -223,6 +223,7 @@ function cursorEmojiForPath(pathname: string): string {
   if (pathname === '/software' || pathname.startsWith('/software/')) return '👾';
   if (pathname === '/finance' || pathname.startsWith('/finance/')) return '💸';
   if (pathname === '/healthcare' || pathname.startsWith('/healthcare/')) return '💊';
+  if (pathname === '/hardware' || pathname.startsWith('/hardware/')) return '🤖';
   if (pathname === '/art' || pathname.startsWith('/art/')) return '🖼️';
   return '🏎️';
 }
