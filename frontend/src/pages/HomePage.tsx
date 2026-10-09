@@ -14,7 +14,7 @@ const projects: { icon: LucideIcon; art: string; charset: MatrixCharset; artLabe
 const experience = [
   { period: 'CURRENT', role: 'Software Engineering Student', organization: 'Western Governors University', detail: 'Bachelor of Science in Software Engineering (Java), completion date: Nov 2026.' },
   { period: '2022–2025', role: 'Inpatient Pharmacy Technician', organization: 'Seattle Veterans Affairs Hospital', detail: 'Evening-shift inpatient pharmacy technician.' },
-  { period: 'EDUCATION', role: 'Education / Independent Work', organization: 'Western Governors University · Community College of the Air Force', detail: 'BS Software Engineering (Java), 2026 · AAS Pharmacy Technology, 2017 · Front End Web Development WGU Certificate, Mar 2024 · AWS Certified Cloud Practitioner · ITIL Foundation · CompTIA Project+ · Series 65 in progress.' },
+  { period: 'EDUCATION', role: 'Education / Independent Work', organization: 'Western Governors University · Community College of the Air Force', detail: 'BS Software Engineering (Java) 2026 · AAS Pharmacy Technology, 2017 · Front End Web Development WGU Certificate · AWS Certified Cloud Practitioner · ITIL Foundation · CompTIA Project+ · Series 65 (in progress).' },
 ];
 
 // cmatrix-style falling columns: a trail of glyphs led by a single brighter head
