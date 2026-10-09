@@ -223,7 +223,7 @@ export default function HomePage() {
     <main>
       <section className="hero-section" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="eyebrow"><span className="status-dot" /> AGENTIC ENGINEER <span className="eyebrow-divider">/</span> FULL STACK</p>
+          <p className="eyebrow"><span className="status-dot" /> SOFTWARE ENGINEER <span className="eyebrow-divider">/</span> FULL STACK (OPEN FOR WORK)</p>
           <HeroTitle />
           <p className="hero-summary">The misfits, the rebels. The troublemakers. The round pegs in the square holes. The ones who see things differently. They’re not fond of rules. You can quote them, disagree with them, glorify or vilify them. About the only thing you can’t do is ignore them. Because they change things. They push the human race forward. And while some may see them as the crazy ones, we see genius. Because the ones who are crazy enough to think that they can change the world, are the ones who do.</p>
           <p className="hero-stack">React · TypeScript · Java · Spring Boot · MySQL · Docker</p>

@@ -164,6 +164,29 @@
 .tile-red { background: linear-gradient(145deg, rgba(155,56,73,.45), rgba(48,24,31,.82)); }
 .tile-slate { background: linear-gradient(145deg, rgba(60,92,111,.47), rgba(24,33,43,.85)); }
 .market-footnote { margin: 14px 0 0; color: #737987; font-size: 11px; line-height: 1.7; }
+
+/* TradingView Heatmap Layout */
+.sector-group { margin-top: 48px; padding-bottom: 32px; }
+.sector-group:first-child { margin-top: 22px; }
+.sector-title { margin: 0 0 14px; color: var(--lime); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.06); }
+
+.tv-heatmap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 16px; row-gap: 24px; }
+.tv-tile { background: var(--panel); border: 1px solid rgba(255,255,255,.06); border-radius: 6px; overflow: hidden; transition: border-color .2s, box-shadow .2s; }
+.tv-tile:hover { border-color: rgba(68,210,197,.35); box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+.tv-tile-header { padding: 10px 12px 16px; border-bottom: 1px solid rgba(255,255,255,.04); }
+.tv-symbol { display: block; color: #f0f1f4; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .02em; }
+.tv-name { display: block; margin-top: 2px; color: #8b909d; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 1100px) {
+  .tv-heatmap { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 800px) {
+  .tv-heatmap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .tv-heatmap { grid-template-columns: 1fr; }
+  .tv-name { font-size: 10px; }
+}
 .index-list-heading, .index-row { display: grid; grid-template-columns: 100px minmax(0,1fr) 125px; gap: 15px; align-items: center; }
 .index-list-heading { padding: 0 0 12px; color: #6e7481; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; }
 .index-row { min-height: 76px; padding: 13px 0; border-top: 1px solid rgba(255,255,255,.07); }

@@ -50,6 +50,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--teal); outline-
   50% { text-shadow: 1px 0 var(--red), -1px 0 var(--teal); transform: translateX(1px); }
   100% { text-shadow: none; transform: translateX(0); }
 }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 .main-nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 38px); }
 .main-nav a { color: #a6a9b2; font-size: 14px; font-weight: 600; transition: color .18s ease; }
 .main-nav a:hover, .main-nav a.active { color: var(--red); }

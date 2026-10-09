@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, Calculator, CircleDollarSign, TrendingUp } from 'lucide-react';
 import { getProject, categories, type CategoryKey } from '../data/portfolio';
+import { TradingViewMiniChart } from '../components/TradingViewWidgets';
 import { getMonthlyBasicPay2026, militaryGradeGroups, serviceBrackets, type PayGrade } from '../data/militaryPay2026';
 import { bahLocationsByState, getBahLocation2026, getMonthlyBah2026, getMonthlyBas2026, type DependentStatus } from '../data/militaryAllowances2026';
 import { stateIncomeTaxSchedules2026, type StateTaxBracket2026, type StateTaxFilingKind } from '../data/stateIncomeTax2026';
@@ -134,13 +135,15 @@ export function ProjectRoutePage({ projectCategory, projectSlug }: { projectCate
   const project = getProject(category, slug);
   if (!project || !category) return <NotFoundPage />;
   const categoryLabel = categories[category as CategoryKey]?.label ?? category;
+  const categoryData = categories[category as CategoryKey];
+  const kickerColorClass = categoryData?.accent === 'lime' ? 'lime-kicker' : categoryData?.accent === 'red' ? 'red-kicker' : '';
   const Icon = project.icon;
   return (
     <main className={`route-main project-detail-page category-${category}`}>
       <PageBreadcrumb category={categoryLabel} title={project.title} />
       <section className="detail-hero">
         <div className="detail-icon"><Icon size={42} strokeWidth={1.4} aria-hidden="true" /></div>
-        <div className="detail-copy"><p className="section-kicker">{project.kicker} / {project.status === 'demo' ? 'DEMO' : 'CASE STUDY'}</p><h1>{project.title}</h1><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span className="tech-tag" key={tag}>{tag}</span>)}</div></div>
+        <div className="detail-copy"><p className={`section-kicker ${kickerColorClass}`}>{project.kicker} / {project.status === 'demo' ? 'DEMO' : 'CASE STUDY'}</p><h1>{project.title}</h1><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span className="tech-tag" key={tag}>{tag}</span>)}</div></div>
       </section>
       <section className="detail-placeholder">
         <div className="placeholder-top"><span>PROJECT DETAIL</span><span className={`project-status status-${project.status}`}>{project.status === 'demo' ? 'DEMO DATA' : 'PROJECT SLOT'}</span></div>
@@ -252,19 +255,77 @@ export function ProjectRoutePage({ projectCategory, projectSlug }: { projectCate
   );
 }
 
-const sampleCells = [
-  ['AAPL', 'teal'], ['MSFT', 'lime'], ['NVDA', 'red'], ['AMZN', 'teal'], ['GOOGL', 'slate'], ['META', 'lime'],
-  ['BRK.B', 'slate'], ['LLY', 'red'], ['AVGO', 'teal'], ['JPM', 'lime'], ['V', 'slate'], ['XOM', 'red'],
-  ['UNH', 'teal'], ['COST', 'lime'], ['MA', 'teal'], ['HD', 'slate'], ['PG', 'red'], ['NFLX', 'lime'],
-  ['ORCL', 'teal'], ['CRM', 'red'], ['ABBV', 'slate'], ['KO', 'lime'], ['MRK', 'teal'], ['BAC', 'red'],
+const heatmapSymbols = [
+  { symbol: 'AAPL', name: 'Apple Inc.', sector: 'Technology', exchange: 'NASDAQ' },
+  { symbol: 'MSFT', name: 'Microsoft Corp.', sector: 'Technology', exchange: 'NASDAQ' },
+  { symbol: 'NVDA', name: 'NVIDIA Corp.', sector: 'Technology', exchange: 'NASDAQ' },
+  { symbol: 'AMZN', name: 'Amazon.com Inc.', sector: 'Consumer Cyclical', exchange: 'NASDAQ' },
+  { symbol: 'GOOGL', name: 'Alphabet Inc.', sector: 'Communication Services', exchange: 'NASDAQ' },
+  { symbol: 'META', name: 'Meta Platforms Inc.', sector: 'Communication Services', exchange: 'NASDAQ' },
+  { symbol: 'BRK.B', name: 'Berkshire Hathaway', sector: 'Financial Services', exchange: 'NYSE' },
+  { symbol: 'LLY', name: 'Eli Lilly & Co.', sector: 'Healthcare', exchange: 'NYSE' },
+  { symbol: 'AVGO', name: 'Broadcom Inc.', sector: 'Technology', exchange: 'NASDAQ' },
+  { symbol: 'JPM', name: 'JPMorgan Chase & Co.', sector: 'Financial Services', exchange: 'NYSE' },
+  { symbol: 'V', name: 'Visa Inc.', sector: 'Financial Services', exchange: 'NYSE' },
+  { symbol: 'XOM', name: 'Exxon Mobil Corp.', sector: 'Energy', exchange: 'NYSE' },
+  { symbol: 'UNH', name: 'UnitedHealth Group', sector: 'Healthcare', exchange: 'NYSE' },
+  { symbol: 'COST', name: 'Costco Wholesale', sector: 'Consumer Defensive', exchange: 'NASDAQ' },
+  { symbol: 'MA', name: 'Mastercard Inc.', sector: 'Financial Services', exchange: 'NYSE' },
+  { symbol: 'HD', name: 'Home Depot Inc.', sector: 'Consumer Cyclical', exchange: 'NYSE' },
+  { symbol: 'PG', name: 'Procter & Gamble', sector: 'Consumer Defensive', exchange: 'NYSE' },
+  { symbol: 'NFLX', name: 'Netflix Inc.', sector: 'Communication Services', exchange: 'NASDAQ' },
+  { symbol: 'ORCL', name: 'Oracle Corp.', sector: 'Technology', exchange: 'NYSE' },
+  { symbol: 'CRM', name: 'Salesforce Inc.', sector: 'Technology', exchange: 'NYSE' },
+  { symbol: 'ABBV', name: 'AbbVie Inc.', sector: 'Healthcare', exchange: 'NYSE' },
+  { symbol: 'KO', name: 'Coca-Cola Co.', sector: 'Consumer Defensive', exchange: 'NYSE' },
+  { symbol: 'MRK', name: 'Merck & Co.', sector: 'Healthcare', exchange: 'NYSE' },
+  { symbol: 'BAC', name: 'Bank of America', sector: 'Financial Services', exchange: 'NYSE' },
 ];
+
+const sectors = Array.from(new Set(heatmapSymbols.map(s => s.sector))).sort();
 
 export function SP500HeatmapPage() {
   return (
     <main className="route-main market-page">
       <PageBreadcrumb category="Finance" title="S&P 500 Heatmap" />
-      <section className="detail-hero"><div className="detail-icon lime-icon"><TrendingUp size={42} strokeWidth={1.4} /></div><div className="detail-copy"><p className="section-kicker lime-kicker">MARKET VISUALIZATION / DEMO</p><h1>S&amp;P 500 heatmap</h1><p>A tile-based layout for scanning a market at a glance. The cells below are illustrative only; they do not represent current performance.</p></div></section>
-      <section className="market-demo-panel"><div className="market-demo-heading"><div><p className="section-kicker">SAMPLE LAYOUT</p><h2>Index components</h2></div><span className="demo-pill">NO LIVE DATA</span></div><div className="stock-heatmap">{sampleCells.map(([ticker, color]) => <div className={`stock-tile tile-${color}`} key={ticker}><span>{ticker}</span><small>DEMO</small></div>)}</div><p className="market-footnote">Color blocks are visual placeholders only. Connect a market-data provider to display real returns and constituents.</p></section>
+      <section className="detail-hero">
+        <div className="detail-icon lime-icon"><TrendingUp size={42} strokeWidth={1.4} /></div>
+        <div className="detail-copy">
+          <p className="section-kicker lime-kicker">MARKET VISUALIZATION / TRADINGVIEW</p>
+          <h1>S&P 500 heatmap</h1>
+          <p>Real-time quotes via TradingView widgets. Organized by sector with live price, change %, and intraday chart.</p>
+        </div>
+      </section>
+      <section className="market-demo-panel">
+        <div className="market-demo-heading">
+          <div>
+            <p className="section-kicker">LIVE QUOTES</p>
+            <h2>Index components — top 24 by weight</h2>
+          </div>
+          <span className="demo-pill" style={{ background: 'rgba(68,210,197,.15)', borderColor: 'rgba(68,210,197,.3)' }}>
+            TRADINGVIEW WIDGETS
+          </span>
+        </div>
+        {sectors.map((sector) => (
+          <div className="sector-group" key={sector}>
+            <h3 className="sector-title">{sector}</h3>
+            <div className="tv-heatmap">
+              {heatmapSymbols
+                .filter(s => s.sector === sector)
+                .map(({ symbol, name, exchange }) => (
+                  <div className="tv-tile" key={symbol}>
+                    <div className="tv-tile-header">
+                      <span className="tv-symbol">{symbol}</span>
+                      <span className="tv-name">{name}</span>
+                    </div>
+                    <TradingViewMiniChart symbol={`${exchange}:${symbol}`} height={280} />
+                  </div>
+                ))}
+            </div>
+          </div>
+        ))}
+        <p className="market-footnote">Powered by TradingView. Data delayed 15min. Not investment advice.</p>
+      </section>
       <div className="route-backlink"><Link className="button-text" to="/finance"><ArrowLeft size={14} /> BACK TO FINANCE</Link></div>
     </main>
   );
