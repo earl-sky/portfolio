@@ -223,10 +223,10 @@ export default function HomePage() {
     <main>
       <section className="hero-section" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="eyebrow"><span className="status-dot" /> JUNIOR SOFTWARE ENGINEER <span className="eyebrow-divider">/</span> FULL STACK (OPEN FOR WORK)</p>
+          <p className="eyebrow"><span className="status-dot" /> SOFTWARE ENGINEER STUDENT <span className="eyebrow-divider">/</span> FULL STACK (OPEN FOR WORK)</p>
           <HeroTitle />
-          <p className="hero-summary">The misfits, the rebels. The troublemakers. The round pegs in the square holes. The ones who see things differently. They’re not fond of rules. You can quote them, disagree with them, glorify or vilify them. About the only thing you can’t do is ignore them. Because they change things. They push the human race forward. And while some may see them as the crazy ones, we see genius. Because the ones who are crazy enough to think that they can change the world, are the ones who do.</p>
-          <p className="hero-stack">React · TypeScript · Java · Spring Boot · MySQL · Docker</p>
+          <p className="hero-summary">The misfits, the rebels. The troublemakers. The round pegs in the square holes. The ones who see things differently. They’re not fond of rules. You can quote them, disagree with them, glorify or vilify them. About the only thing you can’t do is ignore them. Because they change things. They push the human race forward. And while some may see them as the crazy ones, we see genius. Because the ones who are crazy enough to think that they can change the world, are the ones who do. - Steve Jobs</p>
+          <p className="hero-stack">React · TypeScript · Java Spring Boot · MySQL · Docker · Git · Python</p>
           <div className="hero-actions"><Link className="button-primary" to="/software">EXPLORE SOFTWARE <span aria-hidden="true">↘</span></Link><Link className="button-text" to="/about">RÉSUMÉ <span aria-hidden="true">→</span></Link></div>
         </div>
         <div className="hero-visuals">
