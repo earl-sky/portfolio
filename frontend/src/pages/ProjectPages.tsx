@@ -124,6 +124,12 @@ const terminalArtGroups = [
   },
 ];
 
+// Legacy fullscreen attribute names carried over from the supplied RetroGames.cc
+// embed snippet. React's iframe typings do not declare them, so they are spread
+// through as plain lowercase attributes (modern browsers ignore the prefixes and
+// use `allowFullScreen` instead).
+const pixelRpgLegacyFullscreen = { webkitallowfullscreen: 'true', mozallowfullscreen: 'true' };
+
 function PageBreadcrumb({ category, title }: { category: string; title: string }) {
   return <div className="page-breadcrumb"><Link to="/">HOME</Link><span>/</span><Link to={`/${category.toLowerCase()}`}>{category.toUpperCase()}</Link><span>/</span><span>{title.toUpperCase()}</span></div>;
 }
@@ -143,10 +149,10 @@ export function ProjectRoutePage({ projectCategory, projectSlug }: { projectCate
       <PageBreadcrumb category={categoryLabel} title={project.title} />
       <section className="detail-hero">
         <div className="detail-icon"><Icon size={42} strokeWidth={1.4} aria-hidden="true" /></div>
-        <div className="detail-copy"><p className={`section-kicker ${kickerColorClass}`}>{project.kicker} / {project.status === 'demo' ? 'DEMO' : 'CASE STUDY'}</p><h1>{project.title}</h1><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span className="tech-tag" key={tag}>{tag}</span>)}</div></div>
+        <div className="detail-copy"><p className={`section-kicker ${kickerColorClass}`}>{project.kicker} / {project.status === 'demo' ? 'DEMO' : project.status === 'playable' ? 'PLAYABLE DEMO' : 'CASE STUDY'}</p><h1>{project.title}</h1><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span className="tech-tag" key={tag}>{tag}</span>)}</div></div>
       </section>
       <section className="detail-placeholder">
-        <div className="placeholder-top"><span>PROJECT DETAIL</span><span className={`project-status status-${project.status}`}>{project.status === 'demo' ? 'DEMO DATA' : 'PROJECT SLOT'}</span></div>
+        <div className="placeholder-top"><span>PROJECT DETAIL</span><span className={`project-status status-${project.status}`}>{project.status === 'playable' ? 'PLAYABLE EMBED' : project.status === 'demo' ? 'DEMO DATA' : 'PROJECT SLOT'}</span></div>
         {project.slug === 'embedded' ? (
           <div className="embedded-project">
             <div className="embedded-project-content">
@@ -241,6 +247,33 @@ export function ProjectRoutePage({ projectCategory, projectSlug }: { projectCate
               </section>
             ))}
             <p className="terminal-art-note">Press Ctrl+C to quit interactive demos. Install packages one at a time; Homebrew formula availability varies by macOS version and enabled taps. <code>btop++</code> is commonly launched with the <code>btop</code> command.</p>
+          </div>
+        ) : project.slug === 'pixel-rpg' ? (
+          <div className="pixel-rpg-content">
+            <div className="pixel-rpg-intro">
+              <h2>Play it right here</h2>
+              <p>Pokemon Quetzal (English, Alpha 8v2) loaded straight into the page from RetroGames.cc. Click the frame first so it takes keyboard focus, then use the emulator controls the host site provides.</p>
+            </div>
+            <div className="pixel-rpg-frame">
+              <iframe
+                src="https://www.retrogames.cc/embed/46739-pokemon-quetzal-english-alpha8v2.html"
+                title="Pixel RPG — Pokemon Quetzal (English) Alpha 8v2"
+                width="600"
+                height="450"
+                frameBorder="no"
+                scrolling="no"
+                allowFullScreen
+                allow="cross-origin-isolated"
+                {...pixelRpgLegacyFullscreen}
+              />
+            </div>
+            <p className="pixel-rpg-note">The game runs entirely on the RetroGames.cc servers inside a cross-origin iframe; this site only embeds it. Availability, loading speed, ads, emulator controls, and save slots belong to that host, and it may refuse embedding or change the page without notice. If the frame stays blank, open the game page directly instead: <a href="https://www.retrogames.cc/46739-pokemon-quetzal-english-alpha8v2.html" target="_blank" rel="noreferrer">retrogames.cc/46739-pokemon-quetzal-english-alpha8v2.html ↗</a></p>
+            <div className="pixel-rpg-links">
+              <span>PLAY IT ELSEWHERE</span>
+              <a href="https://mgba.io/" target="_blank" rel="noreferrer">mGBA — GBA emulator ↗</a>
+              <a href="https://archive.org/details/pokemon-emerald-usa-europe" target="_blank" rel="noreferrer">Pokémon Emerald (USA/Europe) on archive.org ↗</a>
+              <a href="https://pokemonquetzal.app/" target="_blank" rel="noreferrer">Pokémon Quetzal official site ↗</a>
+            </div>
           </div>
         ) : (
           <>

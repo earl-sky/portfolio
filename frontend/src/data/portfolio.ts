@@ -1,8 +1,8 @@
 import type { LucideIcon } from 'lucide-react';
-import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, CircuitBoard, ClipboardList, Cpu, Gamepad2, MessagesSquare, Pill, Shapes, Terminal } from 'lucide-react';
+import { Activity, BrainCircuit, Calculator, ChartNoAxesCombined, CircuitBoard, ClipboardList, Cpu, Gamepad2, Joystick, MessagesSquare, Pill, Shapes, Terminal } from 'lucide-react';
 
 export type CategoryKey = 'software' | 'hardware' | 'finance' | 'healthcare' | 'art';
-export type ProjectStatus = 'concept' | 'demo' | 'tool';
+export type ProjectStatus = 'concept' | 'demo' | 'tool' | 'playable';
 export type PortfolioProject = {
   slug: string;
   title: string;
@@ -71,6 +71,7 @@ export const categories: Record<CategoryKey, PortfolioCategory> = {
       { slug: 'terminal-art', title: 'Terminal Art', kicker: 'COMMAND-LINE VISUALS', description: 'A collection of terminal-native animations, ASCII art, audio visualizers, and system dashboards for macOS.', route: '/art/terminal-art', icon: Terminal, tags: ['Homebrew', 'ASCII', 'Terminal'], status: 'concept' },
       { slug: 'creative-toolkit', title: 'Creative Toolkit', kicker: 'GAMES / PIXEL ART / INTERACTIVE FICTION', description: 'A red-themed reference page linking official sites for PICO-8, PuzzleScript, Twine, Bitsy, Lospec, and LibreSprite.', route: '/art/creative-toolkit', icon: Gamepad2, tags: ['Game dev', 'Pixel art', 'Twine'], status: 'tool' },
       { slug: 'effects-patterns', title: 'Effects & Patterns', kicker: 'EFFECTS / GENERATIVE PATTERNS', description: 'A red-themed reference page linking The Ladybug browser effects studio and the Book of Shapes generative SVG pattern library.', route: '/art/effects-patterns', icon: Shapes, tags: ['Effects', 'SVG patterns'], status: 'tool' },
+      { slug: 'pixel-rpg', title: 'Pixel RPG', kicker: 'GAMES / PIXEL RPG / BROWSER EMBED', description: 'A playable pixel RPG embedded in the page: Pokemon Quetzal (English, Alpha 8v2) streamed from RetroGames.cc inside a 600 x 450 frame.', route: '/art/pixel-rpg', icon: Joystick, tags: ['Playable embed', 'retrogames.cc', 'Pixel RPG'], status: 'playable' },
     ],
   },
 };
@@ -86,5 +87,6 @@ export function getProject(categoryKey: string | undefined, slug: string | undef
 export function statusLabel(status: ProjectStatus): string {
   if (status === 'demo') return 'DEMO DATA';
   if (status === 'tool') return 'WORKING TOOL';
+  if (status === 'playable') return 'PLAYABLE EMBED';
   return 'PROJECT SLOT';
 }

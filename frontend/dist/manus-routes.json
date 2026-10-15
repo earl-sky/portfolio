@@ -23,6 +23,7 @@
     { "path": "/healthcare/queue-eve-ivs", "title": "Queue Eve IVs" },
     { "path": "/healthcare/baxter-ivp-exp", "title": "Baxter IVP exp" },
     { "path": "/art/creative-toolkit", "title": "Creative Toolkit" },
-    { "path": "/art/effects-patterns", "title": "Effects & Patterns" }
+    { "path": "/art/effects-patterns", "title": "Effects & Patterns" },
+    { "path": "/art/pixel-rpg", "title": "Pixel RPG" }
   ]
 }

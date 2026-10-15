@@ -60,6 +60,7 @@ function RouteContent() {
           <Route path="/art/terminal-art" element={<ProjectRoutePage projectCategory="art" projectSlug="terminal-art" />} />
           <Route path="/art/creative-toolkit" element={<CreativeToolkitPage />} />
           <Route path="/art/effects-patterns" element={<EffectsPatternsPage />} />
+          <Route path="/art/pixel-rpg" element={<ProjectRoutePage projectCategory="art" projectSlug="pixel-rpg" />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
